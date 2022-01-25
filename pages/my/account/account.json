@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "账号设置",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index"
+  }
+}

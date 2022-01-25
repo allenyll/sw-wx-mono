@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "选择优惠券",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
+    "show-empty-data": "../../templates/show-empty-data/show-empty-data"
+  }
+}

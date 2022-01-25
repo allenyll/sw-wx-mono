@@ -1,0 +1,61 @@
+<navbar page-name="填写发货单" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
+  <view class="goods-item">
+    <view class="delivery-item">快递商品</view>
+    <view class="a-goods">
+      <view class="img-box">
+        <image src="{{orderDetail.pic}}" class="img" />
+      </view>
+      <view class="text-box">
+        <view class="arow arow01">
+          <view class="goods-name">{{orderDetail.goodsName}}</view>
+        </view>
+        <view class="arow">
+          <view class="goods-label">商品属性：{{orderDetail.attributes}}</view>
+        </view>
+        <view class="arow" style="position: absolute; bottom: 10rpx;">
+          <view class="goods-label-item">发货数量：{{orderDetail.applyNum}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="service-type">
+    <view class="delivery-item">申请单信息</view>
+    <view class="delivery-com">
+      <view class="title">申请单号</view>
+      <view class="name">
+        <input class="deliveryNo" value="{{orderDetail.aftersaleNo}}" disabled="true"></input>
+      </view>
+    </view>
+    <view class="delivery-com">
+      <view class="title">申请时间</view>
+      <view class="name">
+        <input class="deliveryNo" value="{{orderDetail.applyTime}}" disabled="true"></input>
+      </view>
+    </view>
+  </view>
+  <view class="delivery-type">
+    <view class="delivery-item">快递信息</view>
+    <view class="delivery-com">
+      <view class="title">快递公司</view>
+      <view class="name">
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{deliveryCom}}" style="width:100%;">
+          <view class="picker">
+            <view class="fb-type">
+              <view class="type-label">{{deliveryCom[index]}}</view>
+              <image class="type-icon" src="/pages/images/down-thin.png"></image>
+            </view>
+          </view>
+        </picker>
+      </view>
+    </view>
+    <view class="delivery-com">
+      <view class="title">快递单号</view>
+      <view class="name">
+          <input class="deliveryNo" placeholder="请正确输入快递单号" type='number' value="{{deliveryNo}}" bindinput="setDeliveryNo">
+        </input>
+      </view>
+    </view>
+  </view>
+  <button class="fb-btn" bindtap="saveDeliveryInfo">保存</button>
+</view>

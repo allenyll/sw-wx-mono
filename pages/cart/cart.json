@@ -1,0 +1,14 @@
+{
+  "navigationBarTitleText": "购物车",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../..//templates/navbar/index",
+    "wxc-abnor": "../../dist/packages/@minui/wxc-abnor/dist/index",
+    "wxc-loadmore": "../../dist/packages/@minui/wxc-loadmore/dist/index",
+    "wxc-counter": "../../dist/packages/@minui/wxc-counter/dist/index",
+    "wxc-price": "../../dist/packages/@minui/wxc-price/dist/index",
+    "wxc-label": "../../dist/packages/@minui/wxc-label/dist/index",
+    "van-icon": "../../dist/packages/vant-weapp/icon/index"
+  }
+}

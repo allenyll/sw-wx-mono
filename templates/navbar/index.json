@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-icon": "../../dist/packages/vant-weapp/icon/index",
+    "van-overlay": "../../dist/packages/vant-weapp/overlay/index"
+  }
+}

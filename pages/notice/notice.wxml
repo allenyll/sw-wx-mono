@@ -1,0 +1,8 @@
+<import src="../../lib/wxParse/wxParse.wxml" />
+<navbar page-name="公告详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="notice" style="top: {{navHeight}}px">
+  <view class="title" style="text-align: center;">{{notice.messageName}}</view>
+  <view class="text">
+      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+    </view>
+</view>

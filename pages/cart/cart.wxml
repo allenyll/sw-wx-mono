@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<import src="../../templates/template-cart/template-cart.wxml" />
+<navbar page-name="购物车" bg-color="white" icon-color="black" font-color="black" show-nav="{{false}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <template is="{{goodsList.list.length > 0 ? 'cart-goods-list' : 'no-goods'}}" data="{{...goodsList}}"></template>
+</view>

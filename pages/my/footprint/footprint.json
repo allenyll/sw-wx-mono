@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的足迹",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index"
+  }
+}

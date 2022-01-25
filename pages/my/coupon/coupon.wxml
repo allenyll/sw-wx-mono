@@ -1,0 +1,35 @@
+<navbar page-name="我的优惠券" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <!-- <view class="coupon-form">
+    <view class="input-box">
+      <input class="coupon-sn" placeholder="请输入优惠码" />
+      <image class="clear-icon" src="https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150647657fcdd0.png"></image>
+    </view>
+    <view class="add-btn disabled">兑换</view>
+  </view> -->
+  <view class="help">使用说明</view>
+  <show-empty-data wx:if="{{coupons.length<=0}}" showType="NO_COUPON"></show-empty-data>
+  <view wx:else class="coupon-list">
+    <block wx:for="{{coupons}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.couponId}}">
+      <view class="item" style="background: {{item.useStatus=='SW2401'?'linear-gradient(to right,#cfa568,#e3bf79)':'linear-gradient(to right,#999,#DDDDDD)'}}">
+         <!-- <view class="tag">新人专享</view>  -->
+        <view class="content">
+          <view class="left">
+            <view class="name">{{item.name}}</view>
+            <view class="time">有效期至{{item.endTime}}</view>
+          </view>
+          <view class="right">
+            <image wx:if="{{item.useStatus=='SW2401'}}" class='mid-img' src='../..//images/coupon_ksy.png'></image>
+    <image wx:if="{{item.useStatus=='SW2402'}}" class='mid-img' src='../..//images/coupon_ysy.png'></image>
+    <image wx:if="{{item.useStatus=='SW2403'}}" class='mid-img' src='../..//images/coupon_gq.png'></image>
+          </view>
+        </view>
+        <view class="condition">
+          <text class="txt">满￥{{item.minLimit}} 减￥{{item.amount}}</text>
+        </view>
+      </view>
+    </block>
+
+    </view>
+
+</view>

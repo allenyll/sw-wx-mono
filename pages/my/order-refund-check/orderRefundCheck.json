@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "服务单详情",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
+    "i-steps": "../../../dist/packages/iview/steps/index",
+    "i-step": "../../../dist/packages/iview/step/index",
+    "van-count-down": "../../../dist/packages/vant-weapp/count-down/index",
+    "van-button": "../../../dist/packages/@vant/button/index"
+  }
+}

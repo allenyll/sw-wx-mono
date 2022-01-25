@@ -1,0 +1,135 @@
+.cash-container{
+  background-color: #f8f8f8;
+  color: #333;
+  position: relative;
+}
+.header{
+  width: 100%;
+  height: 130px;
+  margin-bottom: 10px;
+  background: white;
+}
+
+.header .blance{
+  height:70px;
+  line-height:70px;
+  margin-left:10px;
+  margin-top:20px;
+  font-size:16px;
+
+}
+
+.header .text1{
+  display: block;
+  height: 40px;
+  line-height: 40px;
+}
+
+.header .text2{
+  display: block;
+  font-size:10px; 
+  height:15px;
+  line-height:15px;
+}
+
+.header .money{
+  font-size:24px;
+  color:orange;
+}
+
+.blance-tools{
+  width: 100%;
+  height: 140rpx;
+  margin-bottom: 20rpx;
+  background-color: #FFF;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.blance-tools .a-item{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.blance-tools .a-item .my{
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+.blance-tools .a-item-right{
+  width: 26%;
+  height: 100%;
+  /**display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;*/
+  font-size: 20rpx;
+  color: #333;
+}
+
+.blance-tools .a-item-right .my-member{
+  width:70%;
+  height: 50rpx;
+  line-height: 50rpx;
+  background-color: lightblue;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  float: right;
+  text-align: center;
+  margin-top: 53rpx;
+}
+
+.binner image{
+  width: 100%;
+  height: 160px;
+}
+.vip-list{
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+.flex-row{
+  width: 100%;
+  height: 100%;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-size: 28px 28px !important
+}
+.text{
+  flex: 1;
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+.text text{
+  display: block;
+}
+.text .title{
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.text .sub-title{
+  font-size: 14px;
+  color: #999;
+}
+.chongzhi{
+  border: 1px solid #00beaf;
+  background-color: #fff;
+  color: #00beaf;
+  padding: 6px 10px;
+  border-radius: 8px;
+}

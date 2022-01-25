@@ -1,0 +1,23 @@
+<navbar page-name="收货地址" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <view class="address-list">
+    <view class="a-address" wx:for-items="{{addressList}}" wx:key="index">
+      <view class="left-text {{item.isDefault == 'SW1001'? 'active':''}}" bindtap="{{page == 'orderPay'? 'selectTap':'editAddess'}}" data-id="{{item.id}}">
+        <view class="name-tel">
+          {{item.name}} {{item.phone}}
+        </view>
+        <view class="address-box">
+          {{item.province}}{{item.city}}{{item.region}}{{item.detailAddress}}
+        </view>
+      </view>
+      <wxc-icon class="right-edit" type='edit' size='35' color='#999999' bindtap="editAddess" data-id="{{item.id}}"></wxc-icon>
+      <!--<view class="right-edit" bindtap="editAddess" data-id="{{item.id}}"></view>-->
+    </view>
+  </view>
+  <view class="bottom-box">
+    <view class='arrow-right'>
+      <view class="add-btn" bindtap="addAddess">新增收货地址</view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,113 @@
+<navbar page-name="待付款订单" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <form bindsubmit="createOrder" report-submit="true">
+    <view class="address-box" wx:if="{{isNeedLogistics > 0}}">
+      <view class="add-address" wx:if="{{!curAddressData}}">
+        <view class="title" bindtap="addAddress">新增收货地址</view>
+      </view>
+      <view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
+        <view style='display: flex;flex-direction: row;'>
+          <wxc-icon type='location' size='40' color='#666666' style='padding-left:30rpx;padding-top:20rpx;'></wxc-icon>
+          <view class="name-tel">{{curAddressData.name}} {{curAddressData.phone}}</view>
+        </view>
+        <view class="addr-text">{{curAddressData.detailAddress}}</view>
+      </view>
+    </view>
+    <view class="goods-list">
+      <view class="list-title">商品列表</view>
+      <view class="a-goods" wx:for-items="{{goodsList}}" wx:key="index">
+        <view class="img-box">
+          <image src="{{item.pic}}" class="img" />
+        </view>
+        <view class="text-box">
+          <view class="arow arow01">
+            <view class="goods-name">{{item.name}}</view>
+            <view class="goods-price">¥ {{item.price}}</view>
+          </view>
+          <view class="arow">
+            <view class="goods-label">{{item.selectSpecOption}}</view>
+            <view class="goods-num">x {{item.number}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="peisong-way">
+      <view class="row-box" wx:if="{{isNeedLogistics > 0}}">
+        <view class="row-label">配送方式</view>
+        <view class="right-text" wx:if="{{logisticsFee > 0}}">快递</view>
+        <view class="right-text" wx:if="{{logisticsFee == 0}}">包邮</view>
+      </view>
+      <view class="row-box">
+        <view class="row-label">备注</view>
+        <view class="right-text">
+          <input name="remark" type="text" adjust-position="true" class="liuyan" placeholder="如需备注，请输入" />
+        </view>
+      </view>
+    </view>
+
+    <view class="coupon-box" bindtap='tapCoupon'>
+        <view class="coupon-item">
+            <view class="l">
+                <text class="name">请选择优惠券</text>
+                <text class="txt">{{couponDesc}}</text>
+            </view>
+            <view class="r">
+                <image src="/pages/images/address_right.png"></image>
+            </view>
+        </view>
+    </view>
+
+    <!-- <view class="peisong-way" hidden="{{hasNoCoupons}}">
+      <view class="row-box" style="border-bottom:none;">
+        <view class="row-label">选择使用优惠券</view>
+      </view>
+      <view class="row-box" style="border-bottom:none;">
+        <picker-view indicator-style="height: 50rpx;" style="width: 100%; height: 150rpx;" value="0" bindchange="bindChangeCoupon">
+          <picker-view-column>
+            <view style="line-height: 50px">不使用优惠券</view>
+            <view wx:for="{{coupons}}" wx:key="id" style="line-height: 50px">{{item.amount}}元 {{item.name}}</view>
+          </picker-view-column>
+        </picker-view>
+      </view>
+    </view> -->
+    <view class="goods-info">
+      <view class="row-box">
+        <view class="row-label">商品金额</view>
+        <view class="right-text">¥ {{allGoodsPrice}}</view>
+      </view>
+      <view class="row-box">
+        <view class="row-label">运费</view>
+        <view class="right-text">+ ¥ {{logisticsFee}}</view>
+      </view>
+      <view class="row-box" wx:if="couponAmount > 0">
+        <view class="row-label">优惠券</view>
+        <view class="right-text">- ¥ {{couponAmount}}</view>
+      </view>
+
+      <view class="row-box" style='border-top: 1rpx solid #f4f4f4;margin-top:10rpx; '>
+        <view class="row-label">实付金额:</view>
+        <view class="right-text"> ¥ {{totalAmount}}</view>
+      </view>
+
+      <view class='to-pay' style='margin-top: 80rpx;'>
+        <view>
+          <button class='wx-pay' type='primary' bindtap="wxPay">微信支付</button>
+        </view>
+      </view>
+
+      <view class='to-pay' style='margin-top: 40rpx;'>
+        <view>
+          <button class='wx-pay' bindtap="balancePay">余额支付</button>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="goods-info-no" wx:else >
+    </view> -->
+    <!-- <view class="jiesuan-box">
+      <view class="left-price">
+        <view class="total">合计：¥ {{totalAmount}}</view>
+      </view>
+      <button class="to-pay-btn" formType="submit">提交订单</button>
+    </view> -->
+  </form>
+</view>

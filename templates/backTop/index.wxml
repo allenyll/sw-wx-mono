@@ -1,0 +1,4 @@
+<view wx:if="{{showBack}}" class="btn" bindtap="gotop">
+<!-- <text class="btn-gotop" style="">顶部</text> -->
+<view class="iconfont icon-top icon-top"></view>
+</view>

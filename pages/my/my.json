@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "个人中心",
+  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#0387FE",
+  "usingComponents": {
+    "navbar": "../..//templates/navbar/index",
+    "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
+    "van-icon": "../../dist/packages/vant-weapp/icon/index"
+  }
+}

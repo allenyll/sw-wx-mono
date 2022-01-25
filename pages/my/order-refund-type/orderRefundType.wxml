@@ -1,0 +1,56 @@
+<navbar page-name="选择售后类型" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
+  <view class="goods-item">
+    <view class="refund-item">售后商品</view>
+    <view class="a-goods">
+      <view class="img-box">
+        <image src="{{orderDetail.pic}}" class="img" />
+      </view>
+      <view class="text-box">
+        <view class="arow arow01">
+          <view class="goods-name">{{orderDetail.goodsName}}</view>
+        </view>
+        <view class="arow">
+          <view class="goods-label">商品属性：{{orderDetail.attributes}}</view>
+        </view>
+        <view class="arow" style="position: absolute; bottom: 10rpx;">
+          <view class="goods-label-item">商品单价：￥ {{orderDetail.goodsPrice}}</view>
+          <view class="goods-label-item">购买数量：{{orderDetail.quantity}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="refund-type">
+    <view class="refund-item">售后类型</view>
+    <view class="type-item" bindtap="clickRefund" data-item="{{orderDetail}}" data-type="SW2901">
+      <view class="flex-row">
+        <view class="iconfont icon-refund" style='display:inline;font-size:21px;color: red;'></view>
+        <view class="text">
+          <text class="title">我要退款(无需退货)</text>
+          <text class="sub-title">没收到货，或与店家协商同意不用退货只退款</text>
+        </view>
+        <view class="iconfont icon-youjiantou1" style='color:#999'></view>
+      </view>
+    </view>
+    <view class="type-item" bindtap="clickRefund" data-item="{{orderDetail}}" data-type="SW2903">
+      <view class="flex-row">
+        <view class="iconfont icon-tuihuoguanli" style='display:inline;font-size:21px;color: #69C3AA;'></view>
+        <view class="text">
+          <text class="title">我要退货退款</text>
+          <text class="sub-title">已收到货，需要退换已收到的货</text>
+        </view>
+        <view class="iconfont icon-youjiantou1" style='color:#999'></view>
+      </view>
+    </view>
+    <view class="type-item" bindtap="clickRefund" data-item="{{orderDetail}}" data-type="SW2902">
+      <view class="flex-row">
+        <view class="iconfont icon-huan" style='display:inline;font-size:21px;color: #FF7F00;'></view>
+        <view class="text">
+          <text class="title">我要换货</text>
+          <text class="sub-title">有非人为造成的质量问题，与商家协商换货</text>
+        </view>
+        <view class="iconfont icon-youjiantou1" style='color:#999'></view>
+      </view>
+    </view>
+  </view>
+</view>

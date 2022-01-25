@@ -1,0 +1,47 @@
+<navbar page-name="账号设置" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="account-container" style="top: {{navHeight}}px">
+  <view class='account-li'>
+    <view class='account-text'>头像</view>
+    <view class='account-input'>
+    <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover">
+            </image>
+    </view>
+  </view>
+
+  <view class='account-li'>
+    <view class='account-text'>账户</view>
+    <view class='account-input'>
+      <input class="account-value" type='text' bindinput="bindAccountInput" value="{{userInfo.customerAccount}}"></input>
+    </view>
+  </view>
+
+  <view class='account-li'>
+    <view class='account-text'>昵称</view>
+    <view class='account-input'>{{userInfo.nickName}}</view>
+  </view>
+
+  <view class='account-li'>
+    <view class='account-text'>性别</view>
+    <view class='account-input'>
+    <picker bindchange="bindPickerChange" value="index" range="{{sex}}">
+    <view class="picker">
+      {{sex[index]}}
+    </view>
+  </picker></view>
+  </view>
+
+  <view class='account-li'>
+    <view class='account-text'>邮箱</view>
+    <view class='account-input'>
+      <input class="account-value" type='text' bindinput="bindEmailInput" value="{{userInfo.email}}"></input>
+    </view>
+  </view>
+
+  <view class='account-li'>
+    <view class='account-text'>手机号</view>
+    <view class='account-input'>{{userInfo.phone}}</view>
+  </view>
+
+  <button class='save' type='primary' bindtap="saveAccount">保存</button>
+
+</view>

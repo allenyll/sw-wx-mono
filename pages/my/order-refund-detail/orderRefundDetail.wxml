@@ -1,0 +1,157 @@
+<navbar page-name="{{pageName}}" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
+  <view class="goods-item">
+    <view class="refund-item">售后商品</view>
+    <view class="a-goods">
+      <view class="img-box">
+        <image src="{{orderDetail.pic}}" class="img" />
+      </view>
+      <view class="text-box">
+        <view class="arow arow01">
+          <view class="goods-name">{{orderDetail.goodsName}}</view>
+        </view>
+        <view class="arow">
+          <view class="goods-label">商品属性：{{orderDetail.attributes}}</view>
+        </view>
+        <view class="arow" style="position: absolute; bottom: 10rpx;">
+          <view class="goods-label-item">商品单价：￥ {{orderDetail.goodsPrice}}</view>
+          <view class="goods-label-item">购买数量：{{orderDetail.quantity}}</view>
+          <view class="goods-label-item">申请数量：{{applyNum}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="apply-num">
+      申请数量
+      <van-stepper min="1" max="{{orderDetail.quantity}}" bind:change="onChangeApplyNum" value="{{ applyNum }}" integer style="float: right;"/>
+    </view>
+  </view>
+  <view class="refund-info">
+    <view class="refund-item">申请信息</view>
+    <view class="type-item">
+      <view class="flex-row">
+        <view class="refund-col">申请原因<text style="color: red;">*</text></view>
+        <view class="select-col" bindtap="selectReason">{{reason}}</view>
+        <view class="iconfont icon-youjiantou1" style='color:#999; margin-left: 10rpx;'></view>
+      </view>
+    </view>
+    <view class="type-item" hidden="{{pageType == 'SW2902'? true : false}}" >
+      <view class="flex-row">
+        <view class="refund-col">退款金额<text style="color: red;">*</text></view>
+        <view class="select-col">
+          <input class="refund-input" placeholder-style="color: #FF7F00" type='text' bindinput="" value="{{refundAmountStr}}" disabled="true"></input>
+        </view>
+      </view>
+      <!-- <view>可修改金额，最多可退￥{{orderDetail.price*orderDetail.quantity}}</view> -->
+    </view>
+    <view class="type-item" hidden="{{pageType == 'SW2902'? true : false}}" >
+      <view class="flex-row">
+        <view class="refund-col">退款方式<text style="color: red;">*</text></view>
+        <view class="select-col" bindtap="selectRefundType">{{refundType}}</view>
+        <view class="iconfont icon-youjiantou1" style='color:#999; margin-left: 10rpx;'></view>
+      </view>
+    </view>
+  </view>
+  <view class="refund-info">
+    <view class="refund-item">补充描述和相关凭证</view>
+    <view class="type-item-remark">
+      <view class="flex-row">
+        <view class="refund-remark">
+          <textarea id="feedback" maxlength = '500' class="content" bindinput="checkLength" placeholder="请描述申请售后服务的具体原因" />
+          <view class="text-count">{{contentLen}}/500</view>
+        </view>
+      </view>
+    </view>
+    <view class="type-item-imag">
+      <view class="flex-row">
+        <view class='padding'>
+          <view class='title'>添加图片：（最多3张）</view>
+          <view class='image-input'>
+            <view class='image-list' wx:if="{{tempFilePaths.length}}" wx:for="{{tempFilePaths}}" wx:key="key">
+              <van-badge style="position:absolute;z-index:10;width:20px;height:20px;" catchtap='deleltImage' data-id='{{index}}' info="X" />
+              <view class='add-image' catchtap='previewImage' data-id='{{index}}'>
+                <image class='up-img' src="{{item}}" mode="aspectFill" />
+              </view>
+            </view>
+            <view class='add-image' catchtap='addImage'><view class="iconfont icon-photo-viedo" style="font-size: 40rpx;"></view></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="refund-info" hidden="{{pageType == 'SW2901'? true : false}}">
+    <view class="refund-item">收换方式</view>
+    <view class="type-item">
+      <view class="flex-row">
+        <view class="refund-col">返还方式</view>
+        <view class="select-col" bindtap="selectBackType">{{backType}}</view>
+        <view class="iconfont icon-youjiantou1" style='color:#999; margin-left: 10rpx;'></view>
+      </view>
+    </view>
+    <view class="type-item" bindtap="clickAddress" style="padding: 11px 0px;border-top: 2rpx solid #eee;">
+      <view class="flex-row">
+        <view class="iconfont icon-weizhi" style='display:inline;font-size:21px;color: #999;'></view>
+        <view class="text">
+          <text class="title">{{order.receiverName}}{{order.receiverPhone}}</text>
+          <text class="sub-title">{{order.receiverProvince}}{{order.receiverCity}}{{order.receiverRegion}}{{order.receiverDetailAddress}}</text>
+        </view>
+        <view class="iconfont icon-youjiantou1" style='color:#999'></view>
+      </view>
+    </view>
+  </view>
+  <view class='refund-submit' style='margin-top: 80rpx; margin-bottom: 20rpx;'>
+    <view>
+      <button class='submit' bindtap="refundSubmit">提 交</button>
+    </view>
+  </view>
+
+  <van-action-sheet show="{{ reasonShow }}" title="售后申请原因" bind:close="onCloseReason">
+    <view>
+      <view class="cancel-list">
+        申请原因（必选）
+      </view>
+      <van-radio-group value="{{ reason }}">
+        <van-cell-group>
+          <view wx:for="{{ reasonList }}" wx:key="index">
+            <van-cell style="font-size: 26rpx;" title="{{ item.reason }}" clickable data-name="{{ item.reason }}" bind:click="onClickReason">
+              <van-radio slot="right-icon" name="{{ item.reason }}" />
+            </van-cell>
+          </view>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </van-action-sheet>
+
+  <van-action-sheet show="{{ refundTypeShow }}" title="选择退款方式" bind:close="onCloseRefundType">
+    <view>
+      <view class="cancel-list">
+        退款方式（必选）
+      </view>
+      <van-radio-group value="{{ refundType }}">
+        <van-cell-group>
+          <view wx:for="{{ refundTypeList }}" wx:key="index">
+            <van-cell style="font-size: 26rpx;" title="{{ item.reason }}" clickable data-name="{{ item.reason }}"  data-id="{{ item.id }}" bind:click="onClickRefundType">
+              <van-radio slot="right-icon" name="{{ item.reason }}"/>
+            </van-cell>
+          </view>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </van-action-sheet>
+
+  <van-action-sheet show="{{ backTypeShow }}" title="选择返还方式" bind:close="onCloseBackType">
+    <view>
+      <view class="cancel-list">
+        返还方式（必选）
+      </view>
+      <van-radio-group value="{{ backType }}">
+        <van-cell-group>
+          <view wx:for="{{ backTypeList }}" wx:key="index">
+            <van-cell style="font-size: 26rpx;" title="{{ item.reason }}" clickable data-name="{{ item.reason }}" data-id="{{ item.id }}" bind:click="onClickBackType">
+              <van-radio slot="right-icon" name="{{ item.reason }}"/>
+            </van-cell>
+          </view>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+  </van-action-sheet>
+</view>

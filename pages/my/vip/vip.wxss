@@ -1,0 +1,17 @@
+.vip-container{
+  min-height: 100vh;
+  background-color: #eeeeee;
+  position: relative;
+}
+
+.vip-header{
+  height: 400rpx;
+  width: 100%;
+}
+
+.vip-header .vip-name{
+  background: linear-gradient(to right, black, white);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+

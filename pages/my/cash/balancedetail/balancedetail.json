@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "收支明细",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
+    "wxc-icon": "../../../../dist/packages/@minui/wxc-icon/dist/index"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "订单评价",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
+    "van-tab": "../../dist/packages/vant-weapp/tab/index",
+    "van-panel": "../../dist/packages/@vant/panel/index",
+    "van-badge": "../../dist/packages/@vant/badge/index",
+    "van-button": "../../dist/packages/vant-weapp/button/index",
+    "van-popup": "../../dist/packages/@vant/popup/index",
+    "van-rate": "../../dist/packages/vant-weapp/rate/index"
+  }
+}

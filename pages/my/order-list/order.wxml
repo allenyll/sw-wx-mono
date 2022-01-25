@@ -1,0 +1,139 @@
+<navbar page-name="订单列表" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<backTop show-back="{{showBack}}" bindshowBack="showBack"></backTop>
+<view class="stv-container" style="top: {{navHeight}}px">
+  <view class="tab-bar">
+    <view wx:for="{{tabs}}" wx:key="unique" data-index="{{index}}" bindtap="handlerTabTap" class="tab {{activeTab==index?'active':''}}" style="width: {{stv.windowWidth/tabs.length}}px">
+      {{item}}
+      <wxc-badge wx:if="{{orderList[index].orderList.length>0 && item != '所有订单'}}" class="message__badge {{activeTab==index?'active':''}}">{{orderList[index].orderList.length}}</wxc-badge>
+      <!-- <view class="{{tabClass[index]}}">{{orderList[index].orderList.length}}</view> -->
+    </view>
+    <view style="width: {{stv.lineWidth}}px; left: {{stv.offset/tabs.length}}px" class="under-line {{!stv.tStart? 'withAnimate': ''}}"></view>
+  </view>
+
+
+  <view class="scroll-view">
+    <wxc-loading is-show="{{loadingStatus}}" type="mgj"></wxc-loading>
+
+    <swiper class="orderListSwiper" style="width: 100%; height: 100%; overflow: visible;" current='{{activeTab}}' bindchange="swiperchange">
+
+      <view wx:if="{{orderList === 'null'}}">
+        <view wx:for="{{tabs}}" wx:key="unique">
+          <swiper-item class="one-scene">
+            <scroll-view style="height:100%" scroll-y>
+              <view class="no-order">
+                <wxc-abnor type="ORDER" title='您还没有相关订单~' button="去逛逛" bind:abnortap="toIndexPage"></wxc-abnor>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </view>
+      </view>
+
+      <view wx:else>
+        <view wx:for-items="{{orderList}}" wx:key="id">
+          <swiper-item style="overflow: visible;border-radius: 50%;" class="one-scene">
+            <scroll-view style="height:100%" scroll-y scroll-top='{{topNum}}' bindscroll="scrollFn" bindscrolltolower="scrollHandler">
+              <view wx:if="{{item.isnull}}" class="no-order">
+                <wxc-abnor type="ORDER" title='您还没有相关订单~'></wxc-abnor>
+              </view>
+              <view wx:else class="order-list">
+                <view class="a-order" wx:for-items="{{item.orderList}}" wx:key="index">
+                  <view class="an-order-hd">
+                    <view class="an-order-icon"><van-icon name="shop-o" /></view>
+                    <text style="margin-left: 10rpx; font-size: 12px;">SNU CHIC</text>
+                  </view>
+                  <view class="order-date">
+                    <view class="date-box">下单时间：{{item.orderTime}}</view>
+                    <view wx:if="{{item.orderStatus == 'SW0701'}}" class="status red">待付款</view>
+                    <!-- <view wx:elif="{{item.orderStatus == 'SW0702'}}" class="status red">待发货</view> -->
+                    <view wx:elif="{{item.orderStatus == 'SW0702'}}" class="status red">待发货</view>
+                    <view wx:elif="{{ item.orderStatus == 'SW0703'}}" class="status red">待收货</view>
+                    <view wx:elif="{{item.orderStatus == 'SW0704'}}" class="status red">待评价</view>
+                    <view wx:elif="{{item.orderStatus == 'SW0705' || item.orderStatus == 'SW0706'}}" class="status">已完成</view>
+                    <view wx:elif="{{item.orderStatus == 'SW0707'}}" class="status">已取消</view>
+                    <view wx:elif="{{item.orderStatus == 'SW0708'}}" class="status">已关闭</view>
+                    <view wx:else="{{item.orderStatus == 'SW0709'}}" class="status">已失效</view>
+                  </view>
+                  <!-- <view class="goods-info">
+                    <view class="goods-des">
+                      <view class='order-info'>
+                        <view>订单号:{{item.orderNo}}</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}" wx:if="{{item.orderStatus == 'SW0701' }}">订单详情</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}" wx:elif="{{item.orderStatus == 'SW0702'}}">物流信息</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}" wx:elif="{{item.orderStatus == 'SW0703'}}">确认收货</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}" wx:elif="{{item.orderStatus == 'SW0704'}}">评价订单</view>
+                        <view class='order-advance' bindtap="orderDetail" data-id="{{item.id}}" wx:else="{{item.orderStatus == 'SW0705'}}">查看订单</view>
+                      </view>
+                      <view style='padding-top:15rpx;' wx:if="{{item.orderRemark && item.orderRemark != ''}}">备注： {{item.orderRemark}}</view>
+                    </view>
+                  </view> -->
+                  <view wx:if="{{item.orderDetails.length == 1}}" bindtap="clickOrderDetail" data-id="{{item.id}}">
+                    <view class="goods-container">
+                      <view class="goods-box" wx:for="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
+                        <view class="img-box">
+                          <image src="{{goodsItem.pic}}" class="goods-img"></image>
+                        </view>
+                        <view class="goods-name">{{goodsItem.goodsName}}</view>
+                      </view>
+                      <view class="goods-count">共{{item.goodsCount}}件商品</view>
+                    </view>
+                  </view>
+                  <view wx:if="{{item.orderDetails.length > 1}}" bindtap="clickOrderDetail" data-id="{{item.id}}">
+                    <scroll-view class="goods-img-container" scroll-x="true">
+                      <view class="img-box" wx:for="{{item.orderDetails}}" wx:key="index" wx:for-item="goodsItem">
+                        <image src="{{goodsItem.pic}}" class="goods-img"></image>
+                      </view>
+                      <view class="goods-count">共{{item.goodsCount}}件商品</view>
+                    </scroll-view>
+                  </view>
+                  <view class="price-box">
+                    <view class="total-price">合计：¥ {{item.totalAmount}}</view>
+                    <!-- <view class="total-price" wx:if="{{item.integration > 0}}">合计：¥ {{item.totalAmount}} + {{item.integration}} 积分</view> -->
+                    <view style='display: flex; flex-direction:row; justify-content: space-between;'>
+                      <view hidden="{{item.orderStatus == 'SW0701'? false : true}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="default" size="small" bindtap="getCancelReason" data-id="{{item.id}}" >取消订单</van-button>
+                      </view>
+                      <view hidden="{{item.orderStatus == 'SW0701'? false : true}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="warning" size="small" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.totalAmount}}"  data-score="{{item.integration}}">立即支付</van-button>
+                      </view>
+                      <view hidden="{{item.orderStatus == 'SW0703'? false : true}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="primary" size="small" bindtap="receiveOrderTap" data-id="{{item.id}}" >确认收货</van-button>
+                      </view>
+                      <view  hidden="{{item.orderStatus == 'SW0704'? false : true}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="info" size="small"bindtap="appraiseOrderTap" data-id="{{item.id}}" >立即评价</van-button>
+                      </view>
+                      <view hidden="{{item.orderStatus == 'SW0707'? false : true}}" style="float:right ;margin-left:10rpx;">
+                      <van-button type="danger" size="small" bindtap="deleteTap" data-id="{{item.id}}" >删除订单</van-button>
+                      </view>
+                    </view>
+                    <!--<view class="btn cancel-btn" hidden="{{item.status==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
+                    <view class="btn topay-btn" hidden="{{item.status==0? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">马上付款</view>-->
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </view>
+      </view>
+    </swiper>
+  </view>
+  <van-action-sheet show="{{ show }}" title="订单取消原因" bind:close="onClose">
+    <view class="cancel-sm">订单取消，无法恢复，特价、促销等优惠资格也一同取消；优惠券返还到您的账户中，请及时使用</view>
+    <view>
+      <view class="cancel-list">
+        取消原因（必选）
+      </view>
+      <van-radio-group value="{{ radio }}" bind:change="onChange">
+        <van-cell-group>
+          <view wx:for="{{ cancelReasonList }}" wx:key="index">
+            <van-cell style="font-size: 26rpx;" title="{{ item.reason }}" clickable data-name="{{ item.reason }}" bind:click="onClick">
+              <van-radio slot="right-icon" name="{{ item.reason }}" />
+            </van-cell>
+          </view>
+        </van-cell-group>
+      </van-radio-group>
+    </view>
+    <view class="cancel-submit">
+      <van-button-plus color="#0387FE" block data-id="{{ currentOrderId }}" bindtap="cancelOrderTap">确定</van-button-plus>
+    </view>
+  </van-action-sheet>
+</view>

@@ -1,0 +1,174 @@
+<navbar page-name="订单详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <view wx:if="{{orderDetail.orderStatus == 'SW0701'}}" class="wait-pay">
+    <van-notice-bar
+      left-icon="volume-o"
+      mode="closeable"
+      speed="30"
+      text="请在下单后30分钟内完成付款，超时未支付订单将被自动取消。"
+    />
+  </view>
+    
+  <view class="sec-wrap">
+    <view wx:if="{{ (orderDetail.orderStatus != 'SW0707') && (orderDetail.orderStatus != 'SW0708') && (orderDetail.orderStatus != 'SW0709') }}" class="zan-cell__bd" style='padding: 30rpx 30rpx 20rpx 30rpx; width: 720rpx;'>
+      <van-steps steps="{{ statusSteps }}" active="{{ active }}"/>
+    </view>
+    <view wx:if="{{orderDetail.orderStatus == 'SW0701'}}" class="order-status">
+      <view class="icon-box">
+        <image class="icon" src="../images/order-details/icon-ddfk.png"></image>
+      </view>
+      <view class="right-text">
+        <view class="status red">待支付</view>
+        <view class="des"> 
+          <view style="float: left;">请于</view>
+          <view style="float: left;"><van-count-down time="{{ orderDetail.unPayTime }}" format="DD天HH时mm分ss秒" /></view>
+          <view>内付款，超时订单将自动关闭</view>
+       </view>
+      </view>
+    </view>
+    <view wx:if="{{orderDetail.orderStatus == 'SW0707'}}" class="order-status">
+      <view class="icon-box">
+        <image class="icon" src="../images/order-details/icon-ddgb.png"></image>
+      </view>
+      <view class="right-text">
+        <view class="status red">已取消</view>
+        <view class="des"> 
+          <view style="float: left;">取消原因：</view>
+          <view>{{ orderDetail.note }}</view>
+       </view>
+      </view>
+    </view>
+    <view wx:if="{{orderDetail.orderStatus == 'SW0708'}}" class="order-status">
+      <view class="icon-box">
+        <image class="icon" src="../images/order-details/icon-ddgb.png"></image>
+      </view>
+      <view class="right-text">
+        <view class="status red">已关闭</view>
+        <view class="des"> 
+          <view style="float: left;">关闭原因：</view>
+          <view>{{ orderDetail.note }}</view>
+       </view>
+      </view>
+    </view>
+    <!-- <block wx:if="{{orderDetail.logisticsFee > 0}}">
+      <view wx:if="{{orderDetail.logisticsFee > 0}}" class="wuliu-box">
+        <view class="icon-box">
+          <image class="icon" src="/pages/images/order-details/icon-wuliu.png"></image>
+        </view>
+        <view class="right-text" bindtap="wuliuDetailsTap" data-id="{{orderDetail.orderInfo.id}}">
+          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
+          <block wx:if="{{orderDetail.logisticsTraces}}">
+            <view class="wuliu-text">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptStation}}</view>
+            <view class="wuliu-date">{{orderDetail.logisticsTraces[orderDetail.logisticsTraces.length-1].AcceptTime}}</view>
+          </block>
+        </view>
+        <view class="arrow-right">
+          <image class="arrow" src="/images/order-details/arrow-right.png"></image>
+        </view>
+      </view>
+      <view wx:else class="wuliu-box">
+        <view class="icon-box">
+          <image class="icon" src="/images/order-details/icon-wuliu.png"></image>
+        </view>
+        <view class="right-text">
+          <view class="order-number">快递单号：{{orderDetail.logistics.trackingNumber}}</view>
+          <view class="wuliu-text">暂无物流信息</view>
+        </view>
+      </view>
+      <view class="address-sec">
+        <view class="icon-box">
+          <image class="icon" src="/images/order-details/icon-address.png"></image>
+        </view>
+        <view class="right-box">
+          <view class="name-tel">{{orderDetail.logistics.linkMan}} {{orderDetail.logistics.mobile}}</view>
+          <view class="text">
+            {{orderDetail.logistics.address}}
+          </view>
+        </view>
+      </view>
+    </block> -->
+  </view>
+
+  <view class="address-box">
+    <view style="width:10%; float: left; padding-top: 34rpx;"> 
+      <wxc-icon type='location' size='52' color='#666666' style='padding-left:30rpx;'></wxc-icon>
+    </view>
+    <view class="show-address" s>
+      <view style='display: flex;flex-direction: row;'>
+        <view class="name-tel">{{orderDetail.receiverName}} {{orderDetail.receiverPhone}}</view>
+      </view>
+      <view class="addr-text">{{orderDetail.receiverDetailAddress}}</view>
+    </view>
+  </view>
+  
+  <view class="goods-list">
+    <view class="list-title">商品信息</view>
+    <form bindsubmit="submitReputation">
+      <block wx:for-items="{{orderDetail.orderDetails}}" wx:key="index">
+        <view class="a-goods">
+          <view class="img-box">
+            <image src="{{item.pic}}" class="img" />
+          </view>
+          <view class="text-box">
+            <view class="arow arow01">
+              <view class="goods-name">{{item.goodsName}}</view>
+              <view class="goods-price">¥ {{item.goodsPrice}}</view>
+            </view>
+            <view class="arow">
+              <view class="goods-label">{{item.attributes}}</view>
+              <view class="goods-num">x {{item.quantity}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </form>
+
+  </view>
+  <view class="peisong-way" hidden="true">
+    <view class="row-box">
+      <view class="row-label">配送方式</view>
+      <view class="right-text">顺丰快递</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">留言</view>
+      <view class="right-text">
+        <input name="remark" type="text" class="liuyan" placeholder="如需留言请输入" />
+      </view>
+    </view>
+  </view>
+  <view class="order-info">
+    <view class="list-title" style="border-bottom: 1rpx solid #f4f4f4;">订单信息</view>
+    <view class="row-box">
+      <view class="row-label">订单编号</view>
+      <view class="right-text">{{orderDetail.orderNo}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">下单时间</view>
+      <view class="right-text">{{orderDetail.orderTime}}</view>
+    </view>
+  </view>
+  <view class="goods-info">
+    <view class="list-title" style="border-bottom: 1rpx solid #f4f4f4;">支付信息</view>
+    <view class="row-box">
+      <view class="row-label">商品金额</view>
+      <view class="right-text">¥ {{orderDetail.orderAmount}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">运费</view>
+      <view class="right-text">+ ¥ {{orderDetail.logisticsFee}}</view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">应付总额</view>
+      <view class="right-text" style='color: red'>¥ {{orderDetail.totalAmount}}</view>
+    </view>
+  </view>
+
+  <view class="btn-bottom">
+    <view class="btn btn-red" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="toPayTap" data-id="{{orderDetail.id}}">去支付</view>
+    <view class="btn btn-blue" wx:if="{{orderDetail.orderStatus == 'SW0701'}}" bindtap="cancelOrderTap" data-id="{{orderDetail.id}}">取消订单</view>
+    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0703'}}" bindtap="receiveOrderTap" data-id="{{orderDetail.id}}">确认收货</view>
+    <view class="btn btn-red" wx:elif="{{orderDetail.orderStatus == 'SW0704'}}" bindtap="appraiseOrderTap" data-id="{{orderDetail.id}}">立即评价</view>
+    <view class="btn btn-white" bindtap="deleteOrderTap" data-id="{{orderDetail.id}}">删除订单</view>
+  </view>
+
+</view>

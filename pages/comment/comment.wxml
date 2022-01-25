@@ -1,0 +1,71 @@
+<navbar page-name="商品评价" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class='view' style="top: {{navHeight}}px">
+  <view class='goods-list' wx:if="{{!showRate}}">
+    <view class='a-goods' wx:for-items="{{goodsList}}" wx:key="index">
+      <view class='img-box'>
+        <image src="{{item.pic}}" class='img' />
+      </view>
+      <view class='text-box'>
+        <view class='arow arow01'>
+          <view class='goods-name'>{{item.goodsName}}</view>
+          <!-- <view class='goods-price'>¥ {{item.goodsPrice}}</view> -->
+        </view>
+        <view class='arow'>
+          <button class='goods-button'>填写评论</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='goods-info' wx:for-items="{{goodsList}}" wx:if="{{showRate}}">
+    <view class='image'>
+      <image src='{{ item.pic }}' widthFix></image>
+    </view>
+    <view class='goods-rate'>
+      <text class="goods-txt">商品评分：</text><van-rate value="{{ goodsRate }}"  style="float:left;" bind:change="onChange"/>
+    </view>
+  </view>
+  <van-panel>
+    <view class='item' wx:if="{{showRate}}">
+      <view class='order-info'>
+        <view class='text'>
+          <textarea placeholder='输入评价内容' bindinput='textareaInput'></textarea>
+        </view>
+      </view>
+    </view>
+    <van-panel wx:if="{{showRate}}">
+      <view class='padding'>
+        <view class='title'>添加图片：（最多4张）</view>
+        <view class='image-input'>
+          <view class='image-list' wx:if="{{tempFilePaths.length}}" wx:for="{{tempFilePaths}}" wx:key="key">
+            <van-badge style="position:absolute;z-index:10;width:20px;height:20px;" catchtap='deleltImage' data-id='index' info="X" />
+            <view class='add-image' catchtap='previewImage' data-id='index'>
+              <image class='up-img' src="{{item}}" mode="aspectFill" />
+            </view>
+          </view>
+          <view class='add-image' catchtap='addImage'>+</view>
+        </view>
+      </view>
+    </van-panel>
+    <view class='star-cent'>
+      <view class='star-title'>
+        服务评价：
+      </view>
+      <view class='star-list'>
+       <van-rate value="{{ serviceRate }}" bind:change="onChangeService"/>
+      </view>
+    </view>
+    <view class='star-cent'>
+      <view class='star-title'>
+        送货速度：
+      </view>
+      <view class='star-list'>
+       <van-rate value="{{ deliveryRate }}" bind:change="onChangeDelivery"/>
+      </view>
+    </view>
+    <van-panel>
+      <view class='padding'>
+        <van-button catchtap='send' type="info" size="large">发表评论</van-button>
+      </view>
+    </van-panel>
+  </van-panel>
+</view>

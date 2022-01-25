@@ -1,0 +1,196 @@
+<navbar page-name="服务单详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="stv-container" style="top: {{navHeight}}px">
+  <view class="step-v">
+    <!-- <view class="status">请您发货</view> -->
+    <i-steps current="{{current}}">
+      <i-step>
+          <view slot="title">
+                发起售后
+          </view>
+          <!-- <view slot="content">
+              这里是该步骤的描述信息
+          </view> -->
+      </i-step>
+      <i-step>
+          <view slot="title">
+              平台审核
+          </view>
+      </i-step>
+      <i-step>
+          <view slot="title">
+              卖家收货
+          </view>
+      </i-step>
+      <i-step>
+          <view slot="title">
+              处理完成
+          </view>
+      </i-step>
+    </i-steps>
+    <view class="service" wx:if="{{orderAftersale.aftersaleStatus == 'SW0802'}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">等待处理</view>
+          <view class="service-des">
+            <view style="float: left;">售后申请单已提交，请耐心的等待平台审核处理，如有需要请联系客服！</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="service" wx:if="{{orderAftersale.aftersaleStatus == 'SW0803'}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">等待处理</view>
+          <view class="service-des">
+            <view style="float: left;">售后申请单已取消，如有需要可以在申请页面重新提交售后申请单！</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="service" wx:elif="{{orderAftersale.aftersaleStatus == 'SW0804' && (orderAftersale.deliveryTime != '' || orderAftersale.deliveryTime != null)}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">请您发货</view>
+          <view class="service-des">
+            <view style="float: left;">请尽快发货并填写发货单，如未及时填写服务单将在<van-count-down time="{{orderAftersale.unDeliveryTime}}" format="DD天HH时mm分ss秒" />后自动取消！</view>
+          </view>
+        </view>
+        <view class="service-advice">审核意见：{{orderAftersale.dealNote}}</view>
+      </view>
+      <view class="iconfont icon-youjiantou2" style='color:#999;line-height: 140rpx;font-size: 32rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+    </view>
+    <view class="service" wx:elif="{{orderAftersale.aftersaleStatus == 'SW0804' && (orderAftersale.deliveryTime != '' || orderAftersale.deliveryTime != null)}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">已发货</view>
+          <view class="service-des">
+            <view style="float: left; line-height: 64rpx;">您已发货，快递单号为<text style="color:#0387FE; font-weight: 500;">{{orderAftersale.deliveryNo}}</text></view>
+          </view>
+        </view>
+        <view class="service-advice">审核意见：{{orderAftersale.dealNote}}</view>
+      </view>
+      <view class="iconfont icon-youjiantou2" style='color:#999;line-height: 140rpx;font-size: 32rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+    </view>
+    <view class="service" wx:elif="{{orderAftersale.aftersaleStatus == 'SW0805'}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">拒绝申请</view>
+          <view class="service-des">
+            <view style="float: left;">申请单已被拒绝，请点击进入详情页查看拒绝原因！</view>
+          </view>
+        </view>
+        <view class="service-advice">审核意见：{{orderAftersale.dealNote}}</view>
+      </view>
+      <view class="iconfont icon-youjiantou2" style='color:#999;line-height: 140rpx;font-size: 32rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+    </view>
+    <view class="service" wx:elif="{{orderAftersale.aftersaleStatus == 'SW0806'}}">
+      <view class="service-left">
+        <view class="service-det">
+          <view class="service-status">处理完成</view>
+          <view class="service-des">
+            <view style="float: left; line-height: 60rpx;">服务已完成，感谢您对我们服务的支持！</view>
+          </view>
+        </view>
+        <view class="service-advice">审核意见：{{orderAftersale.dealNote}}</view>
+      </view>
+      <view class="iconfont icon-youjiantou2" style='color:#999;line-height: 140rpx;font-size: 32rpx;margin-right: 20rpx;margin-left: 15rpx;'></view>
+    </view>
+  </view>
+  <view class="service-type" wx:if="{{orderAftersale.aftersaleType != 'SW2901' && (orderAftersale.aftersaleStatus == 'SW0804')}}">
+    <view class="service-item">商品寄回信息</view>
+    <view class="view-item" style="height: auto">
+      <view class="title">寄回地址</view>
+      <view class="name">
+        <view style="padding-top: 17rpx;">{{orderAftersale.receiverProvince}}{{orderAftersale.receiverCity}}{{orderAftersale.receiverRegion}}{{orderAftersale.receiverDetailAddress}}</view>
+      </view>
+    </view>
+    <view class="view-item">
+      <view class="title">收件人</view>
+      <view class="name">
+        <view class="input-item">{{orderAftersale.receiverName}}</view>
+      </view>
+    </view>
+    <view class="view-item">
+      <view class="title">联系方式</view>
+      <view class="name">
+        <view class="input-item">{{orderAftersale.receiverPhone}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="service-type" wx:if="{{orderAftersale.aftersaleType != 'SW2902' && orderAftersale.aftersaleStatus == 'SW0806'}}">
+    <view class="service-item">退款总额</view>
+    <view class="view-item" style="height: auto">
+      <view class="title" style="width:90%;">原路返回(预计0-3个工作日到账)</view>
+      <view class="name">
+        <view style="padding-top: 17rpx; text-align: right;">￥{{orderAftersale.refundAmount}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="goods-item">
+    <view class="service-item">售后商品</view>
+    <view class="a-goods">
+      <view class="img-box">
+        <image src="{{orderAftersale.goodsFile}}" class="img" />
+      </view>
+      <view class="text-box">
+        <view class="arow arow01">
+          <view class="goods-name">{{orderAftersale.goodsName}}</view>
+        </view>
+        <view class="arow">
+          <view class="goods-label">商品属性：{{orderAftersale.attributes}}</view>
+        </view>
+        <view class="arow" style="position: absolute; bottom: 10rpx;">
+          <view class="goods-label-item">申请数量：{{orderAftersale.refundQuality}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="service-type" style="margin-bottom: 120rpx;">
+    <view class="service-item">申请单信息</view>
+    <view class="view-item">
+      <view class="title">申请单号</view>
+      <view class="name">
+        <view class="input-item">{{orderAftersale.aftersaleNo}}</view>
+      </view>
+    </view>
+    <view class="view-item">
+      <view class="title">申请时间</view>
+      <view class="name">
+        <view class="input-item">{{orderAftersale.applyTime}}</view>
+      </view>
+    </view>
+    <view class="view-item">
+      <view class="title">服务类型</view>
+      <view class="name">
+        <view class="input-item" wx:if="{{orderAftersale.aftersaleType == 'SW2901'}}">退款</view>
+        <view class="input-item" wx:if="{{orderAftersale.aftersaleType == 'SW2902'}}">换货</view>
+        <view class="input-item" wx:if="{{orderAftersale.aftersaleType == 'SW2903'}}">退款退货</view>
+      </view>
+    </view>
+    <view class="view-item">
+      <view class="title" wx:if="{{orderAftersale.aftersaleType == 'SW2901'}}">退款原因</view>
+      <view class="title" wx:if="{{orderAftersale.aftersaleType != 'SW2901'}}">退货原因</view>
+      <view class="name">
+        <view class="input-item">{{orderAftersale.aftersaleReason}}</view>
+      </view>
+    </view>
+    <view class="view-item" wx:if="{{orderAftersale.aftersaleType != 'SW2902'}}">
+      <view class="title">退款方式</view>
+      <view class="name">
+        <view class="input-item" wx:if="{{orderAftersale.refundType == 'SW3001'}}">原路返回</view>
+        <view class="input-item" wx:if="{{orderAftersale.refundType == 'SW3002'}}">退还至余额</view>
+        <view class="input-item" wx:if="{{orderAftersale.refundType == 'SW3003'}}">手动处理</view>
+      </view>
+    </view>
+  </view>
+  <view class="btn-box">
+    <view style='width: 100%; flex-direction:row; justify-content: space-between;'>
+      <view wx:if="{{orderAftersale.aftersaleStatus == 'SW0804' && (orderAftersale.deliveryTime == '' || orderAftersale.deliveryTime == null)}}" style="float:right ;margin-left:10rpx;">
+      <van-button type="danger" size="small" round bindtap="deliverOrder" data-id="{{orderAftersale.id}}" data-no="{{orderAftersale.aftersaleNo}}" data-time="{{orderAftersale.applyTime}}" data-pic="{{orderAftersale.goodsFile}}" data-name="{{orderAftersale.goodsName}}" data-num="{{orderAftersale.refundQuality}}" data-attr="{{orderAftersale.attributes}}">填写发货单</van-button> 
+      </view>
+      <view hidden="{{!(orderAftersale.aftersaleStatus == 'SW0802' || orderAftersale.aftersaleStatus == 'SW0804')}}" style="float:right ;margin-left:10rpx;">
+      <van-button type="default" size="small" round bindtap="cancelApply" data-id="{{orderAftersale.id}}" data-orderId="{{orderAftersale.orderId}}" data-orderDetailId="{{orderAftersale.orderDetailId}}" >取消申请</van-button>
+      </view>
+    </view>
+  </view>
+</view>

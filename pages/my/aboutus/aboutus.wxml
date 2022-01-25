@@ -1,0 +1,26 @@
+<navbar page-name="关于我们" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <view class="aboutus-header">
+    <!-- <view style="width: 100%; height: 100%;">
+      <image class="type-img" src="https://system-web-1257935390.cos.ap-chengdu.myqcloud.com/images/202099/23721602232537757.jpeg"></image>
+    </view> -->
+  </view>
+  <view class="title">
+    <text class="title-txt">SNU CHIC</text>
+  </view>
+  <view class="content" style="text-align: center;">
+    <text class="content-txt">
+   一间芝麻大的小铺 八仙过海各抒己见
+
+两三个月煞费苦心 小九九咱向来不精
+
+三番四次精心修整 十分诚意还要加二
+
+五月终可开张经营 百分热情双倍才行
+
+六七淘友常常相聚 千挑万选献上宝贝
+
+七嘴八舌谈生意经 亲们满意才是双赢
+    </text>
+  </view>
+</view>

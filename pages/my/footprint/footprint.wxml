@@ -1,0 +1,18 @@
+<navbar page-name="我的足迹" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="container" style="top: {{navHeight}}px">
+  <view class="footprint">
+    <view class="day-item" wx:for="{{footprintList}}" wx:key="index">
+      <view class="day-hd">上次浏览时间：{{item.updateTime}}</view>
+      <view class="day-list">
+        <view class="item" data-footprint="{{item}}" bindtouchstart="touchStart" bindtouchend="touchEnd" bindtap="deleteItem">
+          <image class="img" src="{{item.goods.fileUrl}}"></image>
+          <view class="info">
+            <view class="name">{{item.goods.goodsName}}</view>
+            <view class="subtitle">{{item.goods.goodsBrief}}</view>
+            <view class="price">￥{{item.goods.price}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

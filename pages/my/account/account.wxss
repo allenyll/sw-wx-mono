@@ -1,0 +1,51 @@
+page{
+  min-height: 100%;
+}
+
+.account-container{
+  min-height: 100%;
+  width: 100%;
+  font-size: 28rpx;
+  /*background-color: #f4f4f4;*/
+  position: relative;
+}
+
+.account-li {
+  width: 85%;
+  height: 140rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  margin: 0 auto;
+}
+
+.account-li .account-text{
+  float: left;
+  height: 140rpx;
+  line-height: 140rpx;
+  width: 30%;
+  text-align: left;
+}
+
+.account-li .account-input{
+  float: right;
+  height: 140rpx;
+  line-height: 140rpx;
+  width: 70%;
+  text-align: right;
+}
+
+.account-li .account-input .account-value{
+  height: 140rpx;
+  line-height: 140rpx;
+}
+
+.userinfo-avatar{
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50rpx;
+  margin-top: 25rpx;
+}
+
+.save{
+  width:400rpx;
+  margin-top: 100rpx;
+}

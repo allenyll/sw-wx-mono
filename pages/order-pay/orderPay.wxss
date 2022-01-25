@@ -1,0 +1,288 @@
+.container {
+  background-color: #f2f2f2;
+}
+
+.address-box {
+  width: 100%;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAYCAYAAADzoH0MAAAAAXNSR0IArs4c6QAAAj1JREFUOBGVVE1LHEEQ7e4EkRBjiBL9AQqCQmB32d3xEMgxp6CCssEFFUMiBA+e9pKTgeBBBRGChEBCPAghISgiiEhu87Gzq/4Df4Yf292+Wulx2llXbRiq+1W9N9VVNcMYltaau2741fOqU3S+zxIUDOIKzAdIfXPdygRhd10ChCUQPxIBmQjO2XcIFu8sANox51wbAokA++H74VuDNbOcnAieRhnWLslRuORcjOfzqY0IabCpCxBOb1SK/cT2YSxOCsEKuVzmdwyztpEAob5fGdKabSCTllhUjTE+5jjpvzEs2loChLpu9TVjioJbTRQKe45nFJn8M5ixCQFyeF74CjXZRDEfR4EQEYKPZLPpLYORbShADt+vOlqrHVypnc600K0zNGwYmWxfIk0EKCAMw1StxnYh0mEIoJziGXKc1A5hN2ZgCEFw2C+l3Md1nhsM9gQ1eZPPZ3broxxzJLZayy6Qn1xzoNWijbCmAkFQfYmWUtGijmBPA1bEgP0hgfjQ0DlaQXAwKKWiYj0yIIqocOvJ+HQ2zKBcPswqJVGkeBvpe+HvQP5lBMkmiuh5lTTwPaT+1ATSx4aizeRy6TWDGWtlgN6/ABFtuyJTIMizjcjkiwTK5aMBDM4esGfkMAvTNwfyqjlft3UBDEyflOdIm3XaAaIE8rKN2acHnnfQq5T+D3K37RKfMG1fbCx5ErhvD2DrzbjzPMifk+FJpN4FFK8AoXU8Aj+QBXwspWToLQh+Ju/xV1q8JSzhvgCBx9kzUoIj2gAAAABJRU5ErkJggg==) no-repeat 705rpx center,
+                url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACcAAAAAICAYAAADUKs5bAAAAAXNSR0IArs4c6QAABKNJREFUeAHt3UFOW0kUQNGPpeyo550lZQORkHoDUTbUnXnUG2oFmgSo2Jn4Xf4AhX+YUE4esnx8KZfQx9xsZx/3Hz683759+/vsn9728ubmy83nz+9f+iD/+Ou/93fb/XG8tpsv/35892IvfbXS9NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW8jtjX6YLo7u724vZbv3E67Xq8d9u26+t/N96HWPY9Xn2lp1xfiWvb9JXA9JW49FW59r5exPt77XGvj/EZcP5KYPpKXNumrwSmr8Slr8q19zzgfJ/Ene8Tl/N95dr7/Rzv77XHvT7GZ8D5K4HpK3E5f1Wuvfu181cSd/5KXM5flWvv93O8v9ce9/oYnwHnrwSmr8Tl/FW59u7Xzl9J3PkrcR3y/PWw5z9+/Lj67/7+z+fbb/7z93d/+/Tpn5c+zu9Xl27bgbwe3v3t68d3L/bSVytNX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX81LX83rqH2tC+C8e1ILxtWlzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzUtfzeuoff24AO6oV//FRNa4q0sXxWihrxHTGtLXohgt9DViWkP6WhSjhb5GTGtIX4titNDXiGkN6WtRjBb6GjGtIX0titFCXyOmNaSvRTFa6GvEtIb0tShGC32NmNaQvhbFaKGvEdMa0teiGC30NWJaQ/paFKOFvkZMa0hfi2K00NeIaQ3pa1GMFvoaMa0hfS2K0UJfI6Y1pK9FMVroa8S0hvS1KEaLI/f1+A5w/rbwKJTnIVeXPksMP+trCPU4pq/Edci/XR2FLsb1dcFx/Yb967rR2YS+zjAmS31NlNaMvhbFbKGvmdPTlL4Sl/NX5dq22/glv/X4ww8Z9j1e+1d6/u1ficv+Vbn2fj/H+3vtcftXfAZOp9v4FRfj9q8Ljus3vD5eNzqb0NcZxmSpr4nSmtHXopgt9DVzeprSV+Jyvq9czvdNzP6VvOxficv+VbnsX03swPvX6chX/7VKHqddXdrU9NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW89NW8jt7X6ah/+7Vl8nPa1cs/LUarA19dOvL5ZUhfv4Bcu6mva0IX/6+vC47rN/R13ehsQl9nGJOlviZKa0Zfi2K20NfM6WlKX4nLbydWLr+d2MTsX8nL/pW47F+Vy/7VxOxfycv+lbjsX5XL/tXE7F/Jy/6VuOxflcv+1cTsX8nL/pW47F+Vy/7VxOxfycv+lbgOv3/9D72wtue2xq4SAAAAAElFTkSuQmCC) no-repeat center bottom;
+  background-size: 16rpx auto, 750rpx auto;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.add-address {
+  width: 664rpx;
+}
+
+.add-address .title {
+  font-size: 28rpx;
+  color: #000;
+  margin-left: 30rpx;
+  background: url(https://cdn.it120.cc/images/weappshop/ico-add-addr.png) no-repeat left center;
+  background-size: 60rpx auto;
+  padding: 40rpx 0 40rpx 90rpx;
+}
+
+.show-address {
+  width: 664rpx;
+  box-sizing: border-box;
+}
+
+.show-address .name-tel {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 20rpx 30rpx;
+}
+
+.show-address .addr-text {
+  font-size: 24rpx;
+  color: #888;
+  margin-left: 100rpx;
+  padding-bottom: 34rpx;
+  line-height: 36rpx;
+}
+
+form {
+  width: 100%;
+}
+
+.goods-list {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.goods-list .list-title {
+  font-size: 28rpx;
+  color: #000;
+  padding: 30rpx 0 25rpx 30rpx;
+}
+
+.goods-list  .a-goods {
+  width: 720rpx;
+  margin-left: 30rpx;
+  display: flex;
+  /*justify-content: space-between;*/
+  border-top: 1px solid #f4f4f4;
+  padding: 30rpx 0 30rpx 0;
+}
+
+.goods-list  .a-goods .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  background-color: #d8d8d8;
+  border-radius: 14rpx;
+}
+
+.goods-list .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.goods-list  .a-goods .text-box {
+  width: 510rpx;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+}
+
+.a-goods .text-box .arow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.a-goods .text-box .arow .goods-name {
+  width: 360rpx;
+  font-size: 26rpx;
+  height: 74rpx;
+  color: #000;
+  line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.a-goods .text-box .arow01 {
+  margin-bottom: 30rpx;
+}
+
+.a-goods .text-box .arow .goods-price {
+  font-size: 26rpx;
+  color: #000;
+  align-self: flex-start;
+}
+
+.a-goods .text-box .arow .goods-label {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.a-goods .text-box .arow .goods-num {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.peisong-way {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.peisong-way .row-box {
+  width: 720rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 24rpx 0 24rpx 30rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+
+.peisong-way .row-label {
+  font-size: 28rpx;
+  color: #000;
+}
+
+.peisong-way .right-text {
+  font-size: 28rpx;
+  color: #666;
+  padding-right: 30rpx;
+}
+
+.peisong-way .liuyan {
+  width: 510rpx;
+  font-size: 28rpx;
+}
+
+.goods-info {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 120rpx;
+  padding-bottom: 24rpx;
+}
+
+.goods-info-no {
+  width: 100%;
+  background-color: #eee;
+  margin-bottom: 120rpx;
+}
+
+.goods-info .row-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 24rpx 30rpx 12rpx 30rpx;
+  font-size: 28rpx;
+  color: #000;
+}
+
+.goods-info .row-box .right-text {
+  text-align: right;
+  color: #e64340;
+}
+
+.jiesuan-box {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 500;
+  border-top: 1px solid #f4f4f4;
+  background-color: #fff;
+}
+
+.jiesuan-box .to-pay-btn {
+  width: 250rpx;
+  text-align: center;
+  height: 100%;
+  line-height: 100rpx;
+  background-color: #0387FE;
+  font-size: 32rpx;
+  color: #fff;
+  border-radius: 0;
+}
+
+.jiesuan-box  .left-price {
+  display: flex;
+  width: 500rpx;
+  justify-content: flex-end;
+  line-height: 100rpx;
+  padding: 0 30rpx 0 0;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.jiesuan-box .total {
+  color: #e64340;
+  text-align: right;
+}
+
+.coupon-box{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border-bottom: 1rpx solid #f4f4f4;
+    margin-bottom: 20rpx;
+}
+
+.coupon-box .coupon-item{
+    width: 100%;
+    height: 108.3rpx;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    padding-left: 31.25rpx;
+}
+
+.coupon-box .l{
+    flex: 1;
+    height: 43rpx;
+    line-height: 43rpx;
+    padding-top: 35rpx;
+}
+
+.coupon-box .l .name{
+    float: left;
+    font-size: 30rpx;
+    color: #666;
+}
+
+.coupon-box .l .txt{
+    float: right;
+    font-size: 30rpx;
+    color: #666;
+}
+
+.coupon-box .r{
+    margin-top: 15.5rpx;
+    width: 77rpx;
+    height: 77rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20rpx;
+}
+
+.coupon-box .r image{
+    width: 52.078rpx;
+    height: 52.078rpx;
+}
+
+.wx-pay {
+  width:92%;
+  height:40px;
+  line-height:40px;
+  font-size:15px;
+  color:#fff;
+  background-color: #0387FE;
+}

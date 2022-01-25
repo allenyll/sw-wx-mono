@@ -1,0 +1,38 @@
+<view class="navbar custom-class" style='height:{{navHeight}}px;background-color:{{bgColor}}'>
+  <view wx:if="{{showNav}}" class="navbar-action-wrap navbar-action-group row item-center" style='top:{{navTop}}px;background-color:rgba(255,255,255,.6)'>
+      <!-- <van-icon name="arrow-left" color="{{iconColor}}" size="16px" block="{{true}}" class="navbar-action_item" bind:click="navBack"></van-icon>
+      <van-icon name="wap-home-o" color="{{iconColor}}" size="16px" block="{{true}}" class="navbar-action_item last" bind:click="toIndex"></van-icon> -->
+      <view class="navbar-action_item iconfont icon-fanhuianniu" style='color:{{iconColor}}' bindtap="navBack"></view>
+      <view class="navbar-action_item las iconfont icon-mulu" style='color:{{iconColor}}' bindtap="toIndex"></view>
+  </view>
+  <view class='navbar-title' style='top:{{navTop}}px; color: {{fontColor}}'>
+    {{pageName}}
+  </view>
+</view>
+<view wx:if="{{showPop}}" class="popup popover popover-light" style="margin: 0px;z-index: 2005; position: absolute; left: 20px;top:{{navTop + 40}}px;">
+  <view class="popover-arrow"></view>
+  <view class="popover-content">
+    <view class="pop-item" bindtap="goto" data-page='index'>
+      <view class="iconfont icon-shouye pop-icon"></view>
+      <view class="pop-name">首页</view>
+    </view>
+    <view class="pop-item" bindtap="goto" data-page='cart'>
+      <view class="iconfont icon-gouwuche2 pop-icon"></view>
+      <view class="pop-name">购物车</view>
+    </view>
+    <view class="pop-item" bindtap="goto" data-page='my'>
+      <view class="iconfont icon-wode pop-icon"></view>
+      <view class="pop-name">个人中心</view>
+    </view>
+    <view class="pop-item" bindtap="goto" data-page='class'>
+      <view class="iconfont icon-shangpinfenlei pop-icon"></view>
+      <view class="pop-name">商品分类</view>
+    </view>
+    
+    <view class="pop-item pop-icon" bindtap="goto" data-page='footprint' style="border: none;">
+      <view class="iconfont icon-zuji"></view>
+      <view class="pop-name">我的足迹</view>
+    </view>
+  </view>
+</view>
+<van-overlay z-index="11" class="overlay" show="{{ showPop }}" bind:click="onClickHide" />

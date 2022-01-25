@@ -1,0 +1,43 @@
+<navbar page-name="收支明细" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="myIntegral-wrap page" id="myIntegral" style="position: relative; top: {{navHeight}}px">
+  <scroll-view class="myIntegral-content" scroll-y="true"  bindscroll="fixedMessageNav" lower-threshold="116" bindscrolltolower="checkMoreMessageData">
+    <view class="message-nav">
+      <view class="type-item {{ currentMessageType == 'all' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="all" >全部</view>
+      <view class="type-item {{ currentMessageType == 'income' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="income" >收入</view>
+      <view class="type-item {{ currentMessageType == 'outcome' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="outcome" >支出</view>
+    </view>
+    <view class="message-nav {{ navFixed ? 'fixed' : 'nofixed' }}">
+      <view class="type-item {{ currentMessageType == 'all' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="all" >全部</view>
+      <view class="type-item {{ currentMessageType == 'income' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="income" >收入</view>
+      <view class="type-item {{ currentMessageType == 'outcome' ? 'active' : '' }}" catchtap="setCurrentMessageType" data-type="outcome" >支出</view>
+    </view>
+    <view class="message-content {{ currentMessageType == 'all' ? 'active' : '' }}" >
+      <block wx:for="{{ allBranch.data }}" wx:key="allBranch.data">
+        <view class="message-item">
+          <view class="message-title">{{ item.content }}</view>
+          <view class="message-time">{{ item.time }}</view>
+          <view class="message-num" wx:if="{{ item.type == 'SW0501' }}">+{{ item.num }}</view>
+          <view class="message-num" wx:if="{{ item.type == 'SW0502' }}"  style="color:red;">-{{ item.num }}</view>
+        </view>
+      </block>
+    </view>
+    <view class="message-content {{ currentMessageType == 'income' ? 'active' : '' }}" >
+      <block wx:for="{{ incomeBranch.data }}" wx:key="incomeBranch.data">
+        <view class="message-item">
+          <view class="message-title">{{ item.content }}</view>
+          <view class="message-time">{{ item.time }}</view>
+          <view class="message-num">+{{ item.num }}</view>
+        </view>
+      </block>
+    </view>
+    <view class="message-content {{ currentMessageType == 'outcome' ? 'active' : '' }}" >
+      <block wx:for="{{ outcomeBranch.data }}" wx:key="outcomeBranch.data">
+        <view class="message-item">
+          <view class="message-title">{{ item.content }}</view>
+          <view class="message-time">{{ item.time }}</view>
+          <view class="message-num" style="color:red;">-{{ item.num }}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>

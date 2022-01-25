@@ -1,0 +1,169 @@
+.view{
+  color:#999999;
+  position: relative;
+}
+.goods-list {
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+.goods-list .a-goods{
+  width: 720rpx;
+  margin-left: 30rpx;
+  display: flex;
+  /*justify-content: space-between;*/
+  border-top: 1px solid #f4f4f4;
+  padding: 30rpx 0 30rpx 0;
+}
+.goods-list  .a-goods .img-box {
+  width: 160rpx;
+  height: 160rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  background-color: #d8d8d8;
+}
+
+.goods-list .img-box .img {
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.goods-list  .a-goods .text-box {
+  width: 510rpx;
+  box-sizing: border-box;
+  padding-top: 10rpx;
+}
+
+.a-goods .text-box .arow {
+  
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goods-button{
+  height:30px;
+  width:80px;
+  font-size:12px;
+  line-height:30px;
+  border:1px solid #0387FE;
+  background:#fff;
+  color: #0387FE;
+  float: right;
+}
+
+.a-goods .text-box .arow .goods-name {
+  width: 360rpx;
+  font-size: 26rpx;
+  height: 74rpx;
+  color: #000;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+.a-goods .text-box .arow01 {
+  margin-bottom: 10rpx;
+  display: flex;
+}
+
+.a-goods .text-box .arow .goods-price {
+  font-size: 26rpx;
+  color: #000;
+  align-self: flex-start;
+}
+
+.a-goods .text-box .arow .goods-label {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.a-goods .text-box .arow .goods-num {
+  font-size: 26rpx;
+  color: #999;
+}
+.goods-info{
+  height: 120rpx;
+  padding: 10rpx;
+}
+.goods-info image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.goods-info .image{
+  width: 15%;
+  float: left;
+  padding: 10rpx;
+}
+.goods-info .goods-rate{
+  width: 80%;
+  float: left;
+  height:120rpx;
+  line-height:120rpx;
+}
+.goods-info .goods-txt{
+  float:left; 
+  font-size: 28rpx;
+}
+.item{  
+  padding: 15px;
+}
+.item .image{
+  flex: 180rpx 0 0;
+}
+.item .image image{
+  width: 160rpx;
+  height: 160rpx;
+}
+.item .order-info{
+  flex: 1
+}
+.item .order-info .text textarea{
+  height: 200rpx;
+  font-size: 28rpx;
+}
+
+.padding{
+  padding: 12px;
+  font-size: 28rpx;
+}
+.padding .title{
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+
+.image-input{
+  display: flex;
+  flex-wrap: wrap
+}
+.image-input .image-list{
+  margin-right: 20rpx;
+}
+.image-input .up-img{
+  width: 100rpx;
+  height: 100rpx;
+}
+.image-input .add-image{
+  width: 100rpx;
+  height: 100rpx;
+  padding: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 50rpx;
+}
+
+.star-cent{
+  padding: 15px;
+  display: flex;
+  line-height: 60rpx;
+}
+.star-cent .star-title{
+  font-size: 28rpx;
+  
+}
+.star-cent .star{
+  font-size: 40rpx;
+  color:rgb(255, 198, 64)
+}

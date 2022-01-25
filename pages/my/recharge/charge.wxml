@@ -1,0 +1,15 @@
+<navbar page-name="在线充值" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<view class="charge-container" style="top: {{navHeight}}px">
+    <form bindsubmit="bindSave">
+    <view class="form-box">
+        <view class="row-wrap">
+            <view class="label">充值金额{{uid}}</view>
+            <view class="label-right">
+                <input name="amount" class="input" type="text" placeholder="0.00"/>
+            </view>
+        </view>
+    </view>
+    <button type="warn" class="save-btn" formType="submit">立即支付</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+    </form>
+</view>

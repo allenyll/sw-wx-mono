@@ -1,0 +1,126 @@
+<navbar page-name="SNU CHIC" bg-color="white" icon-color="black" font-color="black" show-nav="{{false}}"></navbar>
+<backTop show-back="{{showBack}}" bindshowBack="showBack"></backTop>
+<view class="container" style="top: {{navHeight}}px">
+  <view wx:if="{{notices.length > 0}}" class="notice" style='background: white;'>
+
+    <wxc-icon size='40' type="{{'notice'}}" style='margin-right:10rpx;'> </wxc-icon>
+    <wxc-elip style='width: 150rpx; color:red;text-align: center;'>SNU快报</wxc-elip>
+    <wxc-icon size='40' type="{{'minus'}}" style='transform:rotate(90deg); margin-right:10rpx;'> </wxc-icon>
+
+    <swiper class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
+      <navigator wx:for-items="{{notices}}" wx:key="id" url="/pages/notice/notice?id={{item.id}}" open-type="navigate">
+        <swiper-item>
+          <wxc-elip class="notice_item">{{item.messageName}}</wxc-elip>
+        </swiper-item>
+      </navigator>
+    </swiper>
+
+    <wxc-icon size="40" type="{{'arrow-right'}}"></wxc-icon>
+  </view>
+
+  <!-- <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+    <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}">
+      <navigator url="{{item.link}}">
+        <image src="{{item.imageUrl}}" background-size="cover"></image>
+      </navigator>
+    </swiper-item>
+  </swiper> -->
+  <view class="swiper-container">
+    <swiper class="swiper_box" autoplay="true" interval="3000" duration="1000" current='swiperCurrent' bindchange="swiperchange">
+      <swiper-item class='swiper_item' wx:for="{{banner}}" wx:key="id">
+        <image bindtap="" data-id="{{item.id}}" data-param="{{item.link}}" src="{{item.imageUrl}}" class="slide-image" style="-webkit-transform: scale({{ swiperCurrent == index ? 0.9 : 0.65 }}) translate({{ (swiperCurrent == index - 1 || swiperCurrent == index + 1) ? (swiperCurrent - index) * 30 : 0 }}, 0); -webkit-transition: 0.6s;"
+          mode="aspectFill" />
+      </swiper-item>
+      <!--</block>-->
+    </swiper>
+    <view class="dots">
+      <block wx:for="{{banner}}" wx:key="unique">
+        <view class="dot{{index === swiperCurrent ? ' active' : ''}}"></view>
+      </block>
+    </view>
+  </view>
+
+  <!-- <view class="cate-nav">
+    <scroll-view scroll-x="true" class="cate-nav-body" style="width: 750rpx;" scroll-left="{{scrollLeft}}">
+      <view  wx:for="{{navList}}" wx:key="index" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="index" bindtap="switchCate">
+          <view class="name">{{item.name}}</view>
+      </view>
+    </scroll-view>
+  </view> -->
+  <view class="cate-nav">
+      <view  wx:for="{{navList}}" wx:key="index" class="item {{ id == item.id ? 'active' : ''}}" data-id="{{item.id}}" data-index="index" bindtap="clickCategory">
+        <view wx:if="{{index === 0}}" class="iconfont icon-nanzhuang" style='color: #FF69B4; font-size: 35px;'></view>
+        <view wx:if="{{index === 1}}" class="iconfont icon-zhubaoshipin" style='color: #FFA500; font-size: 35px;'></view>
+        <view wx:if="{{index === 2}}" class="iconfont icon-xiebao" style='color: #CD853F; font-size: 35px;'></view>
+        <view wx:if="{{index === 3}}" class="iconfont icon-xie" style='color: #8B4513; font-size: 35px;'></view>
+        <view wx:if="{{index === 4}}" class="iconfont icon-weijin2" style='color: #8B8B00; font-size: 35px; font-weight: 600;'></view>
+        <view class="name">{{item.name}}</view>
+      </view>
+  </view>
+
+  <view class="a-section a-new" wx:if="{{newGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../newGoods/newGoods">
+          <text class="txt">新品首发</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <navigator url="../goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.fileUrl}}" background-size="cover"></image>
+          <text class="name">{{item.goodsName}}</text>
+          <text class="price">￥{{item.price}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <view class="a-section a-new" wx:if="{{hotGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../newGoods/newGoods">
+          <text class="txt">人气推荐</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <navigator url="../goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.fileUrl}}" background-size="cover"></image>
+          <text class="name">{{item.goodsName}}</text>
+          <text class="price">￥{{item.price}}</text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <!-- <view class="a-section a-popular" wx:if="{{hotGoods.length > 0}}">
+    <view class="h">
+      <view>
+        <navigator url="../hotGoods/hotGoods">
+          <text class="txt">人气推荐</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="id">
+        <navigator url="/pages/goods/goods?id={{item.id}}">
+          <image class="img" src="{{item.fileUrl}}" background-size="cover"></image>
+          <view class="right">
+            <view class="text">
+              <text class="name">{{item.goodsName}}</text>
+              <text wx:if="{{item.goodsBrief}}" class="desc">{{item.goodsBrief}}</text>
+              <text class="price">￥{{item.price}}</text>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view> -->
+
+  <view class="index-bottom">
+    <view></view>
+  </view>
+</view>

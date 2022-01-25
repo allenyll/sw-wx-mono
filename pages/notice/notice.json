@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "公告详情",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "navigationBarTitleText": "退款",
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "../../../templates/navbar/index",
+    "van-badge": "../../../dist/packages/@vant/badge/index",
+    "van-stepper": "../../../dist/packages/vant-weapp/stepper/index",
+    "van-panel": "../../../dist/packages/vant-weapp/panel/index",
+    "van-button": "../../../dist/packages/vant-weapp/button/index",
+    "van-loading": "../../../dist/packages/vant-weapp/loading/index",
+    "van-action-sheet": "../../../dist/packages/vant-weapp/action-sheet/index",
+    "van-radio": "../../../dist/packages/vant-weapp/radio/index",
+    "van-radio-group": "../../../dist/packages/vant-weapp/radio-group/index",
+    "van-cell": "../../../dist/packages/vant-weapp/cell/index",
+    "van-cell-group": "../../../dist/packages/vant-weapp/cell-group/index",
+    "van-button-plus": "../../../dist/packages/vant-weapp/button/index"
+  }
+}

@@ -1,0 +1,180 @@
+<navbar page-name="商品详情" bg-color="white" icon-color="black" font-color="black" show-nav="{{true}}"></navbar>
+<scroll-view class="container" style="top: {{navHeight}}px; height: 100%" scroll-y="true">
+  <view wx:if="{{!openAttr}}">
+    <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+      <swiper-item wx:for="{{gallery}}" wx:key="{{id}}">
+        <image src="{{item.fileUrl}}" background-size="cover"></image>
+      </swiper-item>
+    </swiper>
+    <!-- <view class="service-policy">
+      <view class="item">3包服务</view>
+      <view class="item">24小时快速发货</view>
+      <view class="item">满199元免邮费</view>
+    </view> -->
+    <view class="goods-info">
+      <view class="c">
+        <view class="price">￥<text class="price-mon">{{goods.price}}.00</text></view>
+        <view class="name">{{goods.goodsName}}</view>
+        <view class="desc" wx:if="{{goods.goodsBrief}}">{{goods.goodsBrief}}</view>
+        <!-- <view class="brand" wx:if="{{brand.brandName}}">
+          <navigator url="../brandDetail/brandDetail?id={{brand.brandId}}">
+            <text>{{brand.brandName}}</text>
+          </navigator>
+        </view> -->
+      </view>
+    </view>
+    <view class="section-nav section-attr" bindtap="switchAttrPop">
+      <view class="t" wx:if="{{selectSpecOption.length == 0}}">请选择规格数量</view>
+      <view class="t" wx:if="{{selectSpecOption.length > 0}}"> 已选      {{selectSpecOption}}</view>
+      <image class="i" src="../images/address_right.png" background-size="cover"></image>
+    </view>
+    <!--<view class="section-nav section-act">
+      <view class="t">
+        <view class="label">1个促销:</view>
+        <view class="tag">万圣趴</view>
+        <view class="text">全场满499，额外送糖果</view>
+      </view>
+      <image class="i" src="../../static/images/address_right.png" background-size="cover"></image>
+    </view>-->
+    <view class="comments" wx:if="{{comment.count > 0}}">
+      <view class="h">
+        <navigator url="../comment/comment?valueId={{goods.id}}&typeId=0">
+          <text class="t">评价({{comment.count > 999 ? '999+' : comment.count}})</text>
+          <text class="i">查看全部</text>
+        </navigator>
+      </view>
+      <view class="b">
+        <view class="item">
+          <view class="info">
+            <view class="user">
+              <image src="{{comment.data.avatar}}"></image>
+              <text>{{comment.data.nickname}}</text>
+            </view>
+            <view class="time">{{comment.data.add_time}}</view>
+          </view>
+          <view class="content">
+            {{comment.data.content}}
+          </view>
+          <view class="imgs" wx:if="{{comment.data.pic_list.length > 0}}">
+            <image class="img" wx:for="{{comment.data.pic_list}}" wx:key="{{item.id}}" src="{{item.pic_url}}"></image>
+          </view>
+          <!-- <view class="spec">白色 2件</view> -->
+        </view>
+      </view>
+    </view>
+    <view class="goods-attr">
+      <view class="t">商品参数</view>
+      <view class="l">
+        <view class="item" wx:for="{{attribute}}" wx:key="name">
+          <text class="left">{{item.name}}</text>
+          <text class="right">{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="detail">
+      <import src="../../lib/wxParse/wxParse.wxml" />
+      <template is="wxParse" data="{{wxParseData:goodsDetail.nodes}}" />
+    </view>
+
+
+    <view class="common-problem">
+      <view class="h">
+        <view class="line"></view>
+        <text class="title">常见问题</text>
+      </view>
+      <view class="b">
+        <view class="item" wx:for="{{issueList}}" wx:key="{{item.id}}">
+          <view class="question-box">
+            <text class="spot"></text>
+            <text class="question">{{item.question}}</text>
+          </view>
+          <view class="answer">
+            {{item.answer}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="related-goods" wx:if="{{relatedGoods.length > 0}}">
+      <view class="h">
+        <view class="line"></view>
+        <text class="title">大家都在看</text>
+      </view>
+      <view class="b">
+        <view class="item" wx:for="{{relatedGoods}}" wx:key="{{item.id}}">
+          <navigator url="/pages/goods/goods?id={{item.id}}">
+            <image class="img" src="{{item.list_pic_url}}" background-size="cover"></image>
+            <text class="name">{{item.name}}</text>
+            <text class="price">￥{{item.retail_price}}</text>
+          </navigator>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+  <view style= "margin-bottom: {{isIphoneX ? '68rpx' : '0rpx'}};" class="show-popup" wx:if="{{showAttr}}">
+    <view class="popup-mask" bindtap="closePopupTap"></view>
+    <view class="popup-contents">
+      <view class="pop-goods-info">
+        <view class="pop-img-box">
+          <image src="{{goods.fileUrl}}" class="goods-thumbnail" />
+        </view>
+        <view class="pop-goods-des">
+          <view class="pop-goods-price">¥ {{skuPrice}}</view>
+          <view class="pop-goods-title">已选 {{selectSpecOption}}</view>
+        </view>
+        <view class="pop-goods-close" bindtap="closePopupTap"></view>
+      </view>
+      <view class="size-label-box">
+        <block wx:for="{{specsList}}" wx:for-item="specs" wx:for-index="idx" wx:key="id">
+          <view class="label">{{specs.specName}}</view>
+          <view class="label-item-box">
+            <view class="label-item {{item.active ? 'active' : '' }}" wx:for="{{specs.specOptionList}}" wx:key="id" bindtap="clickSpecValue" data-propertyindex="{{idx}}" data-propertyid="{{specs.specId}}" data-propertyname="{{specs.specName}}" data-propertychildindex="index"
+              data-propertychildid="{{item.id}}" data-propertychildname="{{item.name}}">
+              {{item.name}}
+            </view>
+          </view>
+        </block>
+      </view>
+      <view class="buy-num-box">
+        <view class="num-label">购买数量</view>
+        <view class="num-box">
+          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+          <view class="num-input">
+            <input type="number" value="{{buyNumber}}" disabled/>
+          </view>
+          <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+        </view>
+      </view>
+      <view class="popup-btn">
+        <view wx:if="{{!hasSku}}" class="popup-join-btn" bindtap="">
+          暂无库存
+        </view>
+        <view wx:if="{{hasSku}}" class="popup-join-btn-l" bindtap="buyGoods">
+          立即购买
+        </view>
+        <view wx:if="{{hasSku}}" class="popup-join-btn-r" bindtap="addToCart">
+          加入购物车
+        </view>
+      </view>
+    </view>
+  </view>
+
+</scroll-view>
+
+<view class="bottom-btn" wx:if="{{ showAttr == false }}">
+  <view class="l l-collect" style="background:url(data:image/png;base64,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) no-repeat;background-size: 24px 24px; background-position-x: center;background-position-y: center;">
+    <button plain='true' open-type="contact" bindcontact="handleContact" style="border: none;width:100%; height:100%;"></button>
+  </view>
+  <view class="l l-cart">
+    <view class="box">
+      <text class="cart-count">{{cartNum}}</text>
+      <image bindtap="openCartPage" class="icon" src="/pages/images/ic_menu_shoping_nor.png"></image>
+
+    </view>
+  </view>
+  <view class="c" bindtap='buyGoods'>立即购买</view>
+  <view class="r" bindtap="addToCart">加入购物车</view>
+</view>
