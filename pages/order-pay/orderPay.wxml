@@ -3,7 +3,9 @@
   <form bindsubmit="createOrder" report-submit="true">
     <view class="address-box" wx:if="{{isNeedLogistics > 0}}">
       <view class="add-address" wx:if="{{!curAddressData}}">
-        <view class="title" bindtap="addAddress">新增收货地址</view>
+        <view class="title" bindtap="addAddress">
+        <i class="my-icon icon iconfont icon-dizhi" style="color: #666666; font-size: 30rpx; margin-right: 6rpx;"></i>
+        新增收货地址</view>
       </view>
       <view class="show-address" wx:if="{{curAddressData}}" bindtap="selectAddress">
         <view style='display: flex;flex-direction: row;'>

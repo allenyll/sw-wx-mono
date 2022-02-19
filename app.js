@@ -1,4 +1,5 @@
-import Utils from 'utils/util.js';   // 工具函数
+const user = require('utils/user.js')  // 引入
+
 App({
   /**
    * 当小程序初始化完成时，会触发 onLaunch（全局只触发一次）
@@ -30,6 +31,16 @@ App({
     })
   },
 
+  onShow: function(options) {
+    user.checkLogin().then(res => {
+      this.globalData.hasLogin = true;
+      this.globalData.userInfo = wx.getStorageSync('userInfo');
+    }).catch(() => {
+      this.globalData.hasLogin = false;
+      this.globalData.userInfo = null;
+    });
+  },
+
   /**
    * 设置全局变量
    */
@@ -40,10 +51,8 @@ App({
     token:'',
     baseHttpUrl: 'http://localhost:8088',
     baseUrl: 'https://localhost:8443',
-    authUrl: 'https://localhost:8443',
     // baseHttpUrl: 'http://www.allenyll.com:8088',
     // baseUrl: 'https://www.allenyll.com:8443',
-    // authUrl: 'https://www.allenyll.com:8443',
     bearer: 'Bearer ',
     logType: ',JWT_WX',
     onLoadStatus: true,
@@ -52,8 +61,5 @@ App({
     userCoupon: 'NO_USE_COUPON',//默认不适用优惠券
     courseCouponCode: {},//购买课程的时候优惠券信息
     isIphoneX: false
-  },
-
-  // 工具函数
-  utils: Utils
+  }
 })

@@ -37,7 +37,7 @@ Page({
       title: '加载中...',
     });
     // 加载商品分类
-    http('/category/getCategoryTree', param, '', 'GET').then(res => {
+    http('/wx/category/getCategoryTree', param, '', 'GET').then(res => {
       if (res.success) {
         var list = res.data.list;
         if (that.data.classId) {
@@ -66,7 +66,7 @@ Page({
     wx.showLoading({
       title: '加载中...',
     });
-    http('/category/getCategory/'+id, '', '', 'get').then(function (res) {
+    http('/wx/category/getCategory/'+id, '', '', 'get').then(function (res) {
         if (res.success) {
           that.setData({
             currentCategory: res.data.tree[0]

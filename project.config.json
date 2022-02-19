@@ -42,7 +42,7 @@
     "ignoreUploadUnusedFiles": true
   },
   "compileType": "miniprogram",
-  "libVersion": "2.10.1",
+  "libVersion": "2.21.4",
   "appid": "wx95a6a02397595ace",
   "projectname": "SNU",
   "debugOptions": {

@@ -6,6 +6,7 @@
   "usingComponents": {
     "navbar": "../..//templates/navbar/index",
     "wxc-icon": "../../dist/packages/@minui/wxc-icon/dist/index",
-    "van-icon": "../../dist/packages/vant-weapp/icon/index"
+    "van-icon": "../../dist/packages/vant-weapp/icon/index",
+    "wxc-badge": "../../../dist/packages/@minui/wxc-badge/dist/index"
   }
 }

@@ -26,7 +26,6 @@ const http = (url, data, header, method) => {
           wx.navigateTo({
             url: '/pages/login/login'
           });
-          //getToken(url, data, header, method, resolve);
         } else {
           reject({ error: '服务器忙，请稍后重试', code: 500 });
           return;
@@ -41,36 +40,6 @@ const http = (url, data, header, method) => {
       }
     })
   })
-}
-
-function getToken(url, data, header, method, resolve) {
-  wx.login({
-    success: res => {
-      if (res.code) {
-        wx.request({
-          url: app.globalData.authUrl+'/wx/auth/token',
-          data: {
-            code: res.code,
-            mode: 'sweb_wx'
-          },
-          method: "POST",
-          header: {
-            'content-type': 'application/json',
-            'login-type': 'wx'
-          },
-          success: function (res) {
-            var token = res.data.data.accessToken;
-            var openid = res.data.data.openid;
-            app.globalData.openid = openid;
-            app.globalData.token = token;
-            wx.setStorageSync('openid', openid);
-            wx.setStorageSync('token', token);
-            http(url, data, header, method).then(res => resolve(res));
-          }
-        });
-      }  
-    }
-  });
 }
 
 module.exports = http

@@ -19,7 +19,6 @@ Page({
 
   //事件处理函数
   swiperchange: function (e) {
-    //console.log(e.detail.current)
     this.setData({
       swiperCurrent: e.detail.current
     })
@@ -40,16 +39,6 @@ Page({
       msgType: 'SW2702'
     };
     that.init(param)
-    // 通知
-    // await that.getMessages(param)
-    // 轮播
-    // await that.getAds(param)
-    // 新品
-    // await that.getNewGoods(param)
-    // 热卖
-    // await that.getHotGoods(param)
-    // 加载商品分类
-    // await that.getCategory(param)
   },
 
   init: function(param) {
@@ -64,79 +53,6 @@ Page({
             hotGoods: res.data.hotGoodsList,
             navList: res.data.categoryList,
           })
-        }
-        resolve(res)
-      });
-    })
-  },
-
-  getMessages: function(param) {
-    var that = this
-    return new Promise((resolve, reject) => {
-      http('/message/getMessageListByType', param, '', 'post').then(res => {
-        if (res.success) {
-          that.setData({
-            notices: res.data.messageList
-          })
-        }
-        resolve(res)
-      });
-    })
-  },
-
-  getAds: function(param) {
-    var that = this
-    return new Promise((resolve, reject) => {
-      http('/ad/getAdList', param, '', 'post').then(res => {
-        if (res.success) {
-          that.setData({
-            banner: res.data
-          })
-        }
-        resolve(res)
-      });
-    })
-  },
-
-  getNewGoods: function(param) {
-    var that = this
-    return new Promise((resolve, reject) => {
-      http('/goods/getGoodsListByType', {goodsType: 'new'}, '', 'post').then(res => { 
-        if (res.success) { 
-          that.setData({ 
-            newGoods: res.data.goodsList 
-          }) 
-        } else { 
-          dialog.dialog('错误', '获取新品失败，请联系管理员!', false, '确定'); 
-        }
-        resolve(res)
-      })
-    })
-  },
-
-  getHotGoods: function(param) {
-    var that = this
-    return new Promise((resolve, reject) => {
-      http('/goods/getGoodsListByType', { goodsType: 'hot' }, '', 'post').then(res => {
-        if (res.success) {
-          that.setData({
-            hotGoods: res.data.goodsList
-          })
-          console.log(that.data.hotGoods)
-        }
-        resolve(res)
-      });
-    })
-  },
-
-  getCategory: function(param) {
-    var that = this
-    return new Promise((resolve, reject) => {
-      http('/category/tree', '', '', 'GET').then(res => {
-        if (res.success) {
-          that.setData({
-            navList: res.data.list
-          });
         }
         resolve(res)
       });

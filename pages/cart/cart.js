@@ -55,7 +55,7 @@ Page({
   },
   onShow: function () {
     var cartList = [];
-    if (app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/cart/cart'
       var query = {
         url: url,
@@ -432,7 +432,7 @@ Page({
         var param = {
           id: cartBean.goodsId
         }
-        http('/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
+        http('/wx/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
           if (res.success) {
             doneNumber++;
             if (res.data.obj.status == 'SW1402') {
@@ -461,7 +461,7 @@ Page({
           }
         })
       } else {
-        http('/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
+        http('/wx/goods/getGoodsInfo/' + cartBean.goodsId, null, null, 'POST').then(res => {
           if (res.success) {
             doneNumber++;
             that.getSku(res.data.obj.skuStockList, cartBean.specValue)

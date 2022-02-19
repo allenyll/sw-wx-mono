@@ -36,7 +36,7 @@ page{
 
 .my-info {
   float:left; 
-  width:100px; 
+  width:420rpx; 
   padding:10px 0px 0px 17px;
   color:white;
 }
@@ -68,18 +68,18 @@ page{
 }
 
 .my-name{
-  font-size: 23px;
+  font-size: 30rpx;
 }
 
 .my-phone {
-  width:84px;
-  height: 17px;
-  font-size:13px;
-  margin-top:3px;
-  border:1px solid #00BFFF;
-  border-radius: 15px;
+  width:250rpx;
+  height: 40rpx;
+  font-size: 30rpx;
+  margin-top: 6rpx;
+  /* border:1px solid #00BFFF; */
+  /* border-radius: 15px; */
   padding: 2px;
-  text-align:center;
+  /* text-align:center; */
 }
 
 .my-info-detail{
@@ -105,7 +105,7 @@ page{
 }
 
 .member-content .a-item{
-  width: 26%;
+  width: 33.3333%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -264,7 +264,11 @@ page{
 }
 
 .icon{
-  float:left; margin-left:8px;height:50px
+  float:left;
+}
+
+.my-icon{
+  position: relative; color: #0387FE; margin: 6px 0 8px 0; font-size: 60rpx;
 }
 
 .icon-image{
@@ -293,4 +297,11 @@ page{
   text-align: left;
   line-height: normal;
   display: inline;
+}
+
+.message__badge {
+  position: absolute;
+  top: -30rpx;
+  right: -10rpx;
+  z-index: 100;
 }

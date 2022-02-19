@@ -11,10 +11,8 @@ Page({
    */
   data: {
     userInfo: null,
-    hasUserInfo: false,
     hasLogin: false,
     canIUseGetUserProfile: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     showPhone: false,
     phone: '',
     point: 0,
@@ -46,16 +44,14 @@ Page({
       desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
       success: (res) => {
         user.checkLogin().catch(() => {
-          user.loginByWeixin(res.userInfo).then(res => {
+          user.loginByWeixin(app.globalData.baseUrl, res.userInfo).then(res => {
             app.globalData.hasLogin = true;
+            app.globalData.userInfo = res.data.data.customer;
             that.setData({
-              userInfo: res.userInfo,
+              userInfo: res.data.data.customer,
               hasLogin: true
             })
-            this.queryUserInfo()
-            // wx.navigateBack({
-            //   delta: 1
-            // })
+            this.queryUserInfo();
           }).catch((err) => {
             app.globalData.hasLogin = false;
             util.showErrorToast('微信登录失败');
@@ -110,14 +106,14 @@ Page({
     return new Promise((resolve, reject) => {
       http('/customer/queryUserByOpenId?openid=' + openid,'', '', 'post').then(res => {
         if (!res.success) {
-          dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-          reject('授权失败!!!')
+          dialog.dialog('警告', '初始化用户信息失败，请联系管理员!', false, '确定')
+          reject('初始化用户信息失败，请联系管理员!')
           return
         }
         var user = res.data;
         if (undefined == user) {
-          dialog.dialog('警告', '授权失败!!!', false, '返回授权')
-          reject('授权失败!!!')
+          dialog.dialog('警告', '初始化用户信息失败，请联系管理员!', false, '确定')
+          reject('初始化用户信息失败，请联系管理员!')
           return
         }
         var customerPoint = user.customerPoint;
@@ -130,7 +126,6 @@ Page({
         if (undefined != customerBalance) {
           balance = customerBalance.balance;
         }
-        app.globalData.userInfo = user;
         if (null != user.phone && '' != user.phone) {
           var phoneNumber = user.phone
           that.setData({
@@ -139,8 +134,6 @@ Page({
           })
         }
         that.setData({
-          userInfo: app.globalData.userInfo,
-          hasUserInfo: true,
           point: point,
           balance: balance
         })
@@ -223,11 +216,19 @@ Page({
               encryptedData: e.detail.encryptedData
             }
             http('/customer/getPhoneNumber', param, '', 'post').then(res => {
-              that.queryUserInfo();
-              //用户已经授权过
-              // wx.switchTab({
-              //   url: '/pages/my/my'
-              // })
+              if (res.success) {
+                app.globalData.userInfo = res.data;
+                wx.setStorageSync('userInfo', res.data);
+                if (res.data.phone) {
+                  var phoneNumber = res.data.phone
+                  that.setData({
+                    showPhone: true,
+                    phone: phoneNumber.substring(0, 3) + '******' + phoneNumber.substring(9, 11)
+                  })
+                }
+              } else {
+                dialog.dialog('错误', '手机号绑定异常，请稍后重试！', false, '确定');
+              }
             })
           }
         }
@@ -239,7 +240,7 @@ Page({
 
   setAccount: function(){
     var that = this;
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/account/account'
       var query = {
         url: url,
@@ -261,7 +262,7 @@ Page({
    */
   clickPoint: function() {
     var that = this;
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/point/point'
       var query = {
         url: url,
@@ -280,7 +281,7 @@ Page({
 
   clickCash: function() {
     // var that = this;
-    // if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    // if (!app.globalData.hasLogin) {
     //   wx.navigateTo({
     //     url: '/pages/login/login?mark=/pages/my/cash/cash',
     //   })
@@ -311,7 +312,7 @@ Page({
   clickOrder: function(event){
     var that = this;
     var type = event.currentTarget.dataset.type
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/order-list/order'
       if ('SW0801' === type) {
         url = '/pages/my/order-refund/orderRefund'
@@ -340,7 +341,7 @@ Page({
    */
   clickAddress: function () {
     var that = this;
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/address/address'
       var query = {
         url: url,
@@ -363,7 +364,7 @@ Page({
   clickCoupon: function () {
     var that = this;
     console.log(app.globalData.userInfo)
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/coupon/coupon'
       var query = {
         url: url,
@@ -395,7 +396,7 @@ Page({
   clickFeedback: function(event){
     var that = this;
     var type = event.currentTarget.dataset.type
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/feedback/feedback'
       var query = {
         url: url,
@@ -422,7 +423,7 @@ Page({
   clickFootprint: function(event){
     var that = this;
     var type = event.currentTarget.dataset.type
-    if (that.data.hasUserInfo == false || app.globalData.userInfo == null) {
+    if (!app.globalData.hasLogin) {
       var url = '/pages/my/footprint/footprint'
       var query = {
         url: url,
@@ -450,7 +451,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this;
     //获取用户的登录信息
     if (app.globalData.hasLogin) {
       let userInfo = wx.getStorageSync('userInfo');
@@ -458,25 +458,14 @@ Page({
         userInfo: userInfo,
         hasLogin: true
       });
+      if (userInfo.phone) {
+        this.setData({
+          showPhone: true,
+          phone: userInfo.phone.substring(0, 3) + '******' + userInfo.phone.substring(9, 11)
+        });
+      }
+      this.queryUserInfo();
     }
-    // // 查看是否授权
-    // wx.getSetting({
-    //   success: function (res) {
-    //     if (res.authSetting['scope.userInfo']) {
-    //       wx.getUserInfo({
-    //         success: function (res) {
-    //           that.data.hasUserInfo = true;
-    //           //从数据库获取用户信息
-    //           that.queryUserInfo();
-    //           //用户已经授权过
-    //           // wx.switchTab({
-    //           //   url: '/pages/my/my'
-    //           // })
-    //         }
-    //       });
-    //     }
-    //   }
-    // })
   },
 
   /**

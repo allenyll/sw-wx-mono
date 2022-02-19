@@ -42,7 +42,7 @@ Page({
 
   getGoodsInfo: function () {
     let that = this;
-    http('/goods/getGoodsInfo/'+that.data.id, null, null, 'post').then(res => {
+    http('/wx/goods/getGoodsInfo/'+that.data.id, null, null, 'post').then(res => {
       if(res.success){
         that.setData({
           goods: res.data.obj,
@@ -240,7 +240,7 @@ Page({
    */
   saveFootprint: function() {
     let that = this;
-    if (!app.globalData.userInfo) {
+    if (!app.globalData.hasLogin) {
       return;
     }
     var param = {
@@ -341,7 +341,7 @@ Page({
    */
   buyGoods: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.hashLogin) {
       var url = '/pages/goods/goods'
       var query = {
         url: url,
@@ -395,7 +395,7 @@ Page({
    */
   addToCart: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.hashLogin) {
       var url = '/pages/goods/goods'
       var query = {
         url: url,

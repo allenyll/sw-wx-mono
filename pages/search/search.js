@@ -39,7 +39,6 @@ Page({
   getSearchKeyword() {
     let that = this;
     // TODO授权
-    console.log(app.globalData.userInfo);
     var param = {
       userId: app.globalData.userInfo.id
     }
@@ -87,7 +86,6 @@ Page({
 
   clearHistory: function () {
     // TODO授权
-    console.log(app.globalData.userInfo);
     var param = {
       userId: app.globalData.userInfo.id
     }
@@ -118,7 +116,7 @@ Page({
       categoryId: that.data.categoryId,
       userId: app.globalData.userInfo.id
     }
-    http('/goods/searchGoods', param, '', 'post').then(res => {
+    http('/wx/goods/searchGoods', param, '', 'post').then(res => {
       if (res.success) {
         this.setData({
           searchStatus: true,

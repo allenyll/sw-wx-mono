@@ -42,7 +42,7 @@ Page({
   getCategoryInfo: function () {
     let that = this;
     
-    http('/category/getCategoryInfo/' + this.data.id, null, '', 'get')
+    http('/wx/category/getCategoryInfo/' + this.data.id, null, '', 'get')
       .then(function (res) {
         if (res.success) {
           that.setData({
@@ -115,7 +115,7 @@ Page({
       return;
     }
 
-    http("/goods/getGoods", {categoryId: that.data.id, page: that.data.page, limit: that.data.size}, '', 'post')
+    http("/wx/goods/getGoods", {categoryId: that.data.id, page: that.data.page, limit: that.data.size}, '', 'post')
       .then(function (res) {
         if(res.success){
           that.setData({

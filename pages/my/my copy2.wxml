@@ -28,7 +28,8 @@
 
       <view class="member-content">
         <view class="a-item" bindtap="clickPoint">
-          <i class="my-icon icon iconfont icon-jifen" style="margin:15rpx 0 10rpx 0; color: #69C3AA; font-size: 53rpx;"></i>
+          <wxc-icon type="purse" size="{{iconSize-10}}" color="#69C3AA" style="margin:15rpx 0 10rpx 0;">
+          </wxc-icon>
           <view class="my">
             积分:
             <view style="padding:0 10rpx;color: #69C3AA;font-weight: bold;"> {{point}}
@@ -37,7 +38,8 @@
         </view>
 
         <view class="a-item" bindtap="clickCash">
-          <i class="my-icon icon iconfont icon-yue" style="margin:15rpx 0 10rpx 0; color: #666666; font-size: 53rpx;"></i>
+          <wxc-icon type="yen" size="{{iconSize-10}}" color="#666666" style="margin:15rpx 0 10rpx 0;">
+          </wxc-icon>
           <view class="my" style="color:lightgray;text-decoration: line-through;">
             余额:
           <view style="padding: 0 10rpx;color: #666666;font-weight: bold;">{{balance}}</view>
@@ -45,7 +47,8 @@
         </view>
 
         <view class="a-item" bindtap="clickWithdraw">
-          <i class="my-icon icon iconfont icon-fukuan" style="margin:15rpx 0 10rpx 0; color: #FF5777; font-size: 53rpx;"></i>
+          <wxc-icon type="after-sales" size="{{iconSize-10}}" color="#FF5777" style="margin:15rpx 0 10rpx 0;">
+          </wxc-icon>
           <view class="my" style="color:lightgray;text-decoration: line-through;">
             提现中:
             <view style="padding: 0 10rpx;color: #FF5777;font-weight: bold;">0</view>
@@ -69,39 +72,31 @@
     <view class="item-list">
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0701" hover-class="none" class="btn">
-          <i class="my-icon icon iconfont icon-daifukuan">
-            <wxc-badge class="message__badge" wx:if="{{ unPayNum > 0 }}">{{ unPayNum }}</wxc-badge>
-          </i>
+          <van-icon name="balance-pay" info="{{unPayNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">待付款</text>
         </view>
       </view>
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0702" hover-class="none" class="btn">
-          <i class="my-icon icon iconfont icon-daifahuo">
-            <wxc-badge class="message__badge" wx:if="{{ unReceiveNum > 0 }}">{{ unReceiveNum }}</wxc-badge>
-          </i>
+          <van-icon name="logistics" info="{{unReceiveNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">待发货</text>
         </view>
       </view>
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0703" hover-class="none" class="btn">
-          <i class="my-icon icon iconfont icon-daishouhuo">
-            <wxc-badge class="message__badge" wx:if="{{ deliveryNum > 0 }}">{{ deliveryNum }}</wxc-badge>
-          </i>
+          <van-icon name="send-gift-o" info="{{deliveryNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">待收货</text>
         </view>
       </view>
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0704" hover-class="none" class="btn">
-          <i class="my-icon icon iconfont icon-daipingjia">
-            <wxc-badge class="message__badge" wx:if="{{ appraisesNum > 0 }}">{{ appraisesNum }}</wxc-badge>
-          </i>
+          <van-icon name="notes-o" info="{{appraisesNum}}" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">评价</text>
         </view>
       </view>
       <view class="item">
         <view bindtap="clickOrder" data-type="SW0801" hover-class="none" class="btn">
-          <i class="my-icon icon iconfont icon-shouhou"></i>
+          <van-icon name="after-sale" info="" size="20px" style="margin:15rpx 0 10rpx 0;"/>
           <text class="txt">退款/售后</text>
         </view>
       </view>
@@ -111,61 +106,61 @@
   <view class="line-view" style="width:100%;height:25rpx;background-color:#f4f4f4;"></view>
 
   <!-- 内容栏 -->
-  <view class="my-content">
+  <view class="my-content" style="">
     <view class="item">
       <view bindtap="clickOrder" hover-class="none" class="a" data-type="SW0700">
-        <i class="my-icon icon iconfont icon-dingdan"></i>
+        <wxc-icon type="feedback" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">订单管理</text>
       </view>
     </view>
     <view class="item">
       <view bindtap="clickAddress" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-dizhi"></i>
+        <wxc-icon type="address" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">收货地址</text>
       </view>
     </view>
     <view class="item no-border-right">
       <navigator url="/pages/my/location/location" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-shangpu"></i>
+        <wxc-icon type="location" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">到店里</text>
       </navigator>
     </view>
 
     <view class="item">
       <view bindtap="clickCoupon" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-youhuiquan"></i>
+        <wxc-icon type="coupon" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">优惠券</text>
       </view>
     </view>
     <view class="item">
       <view bindtap="clickPointExchange" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-duihuan"></i>
+        <wxc-icon type="rate" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt" style="color:lightgray;text-decoration: line-through;">积分兑换</text>
       </view>
     </view>
     <view class="item no-border-right">
       <view bindtap="clickFootprint" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-zuji"></i>
+        <wxc-icon type="footprint" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">足迹</text>
       </view>
     </view>
     <button class='service' open-type="contact">
       <view class="item item-bottom">
         <view hover-class="none" class="a">
-          <i class="my-icon icon iconfont icon-kefu1"></i>
+          <wxc-icon type="group" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
           <text class="txt" style="font-size: 22rpx;">联系客服</text>
         </view>
       </view>
     </button>
     <view class="item item-bottom" bindtap="aboutUs">
       <view bindtap="clickAboutus" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-women"></i>
+        <wxc-icon type="help" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">关于我们</text>
       </view>
     </view>
     <view class="item no-border-bottom">
       <view bindtap="clickFeedback" hover-class="none" class="a">
-        <i class="my-icon icon iconfont icon-fankui"></i>
+        <wxc-icon type="comment" size="34" color="{{iconColor}}" style="margin:15rpx 0 10rpx 0;"></wxc-icon>
         <text class="txt">意见反馈</text>
       </view>
     </view>
